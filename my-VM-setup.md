@@ -33,3 +33,27 @@ If host is on KDE Plasma, Superkey will interfere with Windows key operation in 
 To fix, while at the guest VM window, hit ```alt + F3``` (alternatively, right click the on title bar of the VM window), then click ```more actions``` -> ```Configure Special Window Settings``` -> ```Add property``` -> ```Appearance and Fixes``` -> ```Ignore global Shortcuts``` -> ```Force``` -> ```Yes``` -> ```Apply```.
 
 More info on superkey issue: <https://www.reddit.com/r/kde/comments/7ueia5/when_using_virtualbox_vm_guests_the_superwindows/>
+
+Using Remmina to connect remotely to the VMs work great! Connect to Windows VM using DRP solves all problems.
+
+<https://www.digitalcitizen.life/connecting-windows-remote-desktop-ubuntu/>  
+
+<https://www.digitalcitizen.life/enable-remote-desktop-windows/>  
+
+For MacOS VMs:
+
+<https://christitus.com/macos-on-linux/>  
+
+<https://computingforgeeks.com/how-to-run-macos-on-kvm-qemu/>  
+
+<https://github.com/foxlet/macOS-Simple-KVM?tab=readme-ov-file>  
+
+<https://github.com/foxlet/macOS-Simple-KVM/issues/168>  
+
+<https://www.tecmint.com/connect-ubuntu-desktop-from-mac/#:~:text=the%20VNC%20client.-,Access%20Mac%20Remotely%20from%20Ubuntu,of%20your%20remote%20Mac%20desktop.&text=Next%2C%20provide%20the%20user%20credentials,press%20the%20%E2%80%9COK%E2%80%9D%20button.&text=Congrats>!
+
+To fix screen resolution: <https://github.com/foxlet/macOS-Simple-KVM/blob/master/docs/guide-screen-resolution.md>
+
+The `diskYsZ` referred is something that looks like `disk1s0`.
+
+The point to press `Escape` is when the TianaCore screen appears. Pressing `Esc` here enters the 'bios' of the VM.
