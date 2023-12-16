@@ -66,3 +66,5 @@ On adding second drives to the computer to be added to be recognised by Proxmox:
 
 Proxmos post-install scripts (auto set no-sub repo): <https://tteck.github.io/Proxmox/>  
 Also get dark theme from same link.
+
+Set static local IP address on Ubuntu VMs: <https://www.freecodecamp.org/news/setting-a-static-ip-in-ubuntu-linux-ip-address-tutorial/>
