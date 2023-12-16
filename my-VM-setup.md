@@ -57,3 +57,7 @@ To fix screen resolution: <https://github.com/foxlet/macOS-Simple-KVM/blob/maste
 The `diskYsZ` referred is something that looks like `disk1s0`.
 
 The point to press `Escape` is when the TianaCore screen appears. Pressing `Esc` here enters the 'bios' of the VM.
+
+### Proxmox
+
+On adding second drives to the computer to be added to be recognised by Proxmox: <https://forum.proxmox.com/threads/how-to-mount-second-partition-or-disk.13215/>
