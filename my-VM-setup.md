@@ -40,6 +40,8 @@ Using Remmina to connect remotely to the VMs work great! Connect to Windows VM u
 
 <https://www.digitalcitizen.life/enable-remote-desktop-windows/>  
 
+To enable audio on Remmina, right-click on VM in list, `Edit` -> `Advanced` -> `Audio Output Mode` -> `Local`.
+
 For MacOS VMs:
 
 <https://christitus.com/macos-on-linux/>  
@@ -61,3 +63,6 @@ The point to press `Escape` is when the TianaCore screen appears. Pressing `Esc`
 ### Proxmox
 
 On adding second drives to the computer to be added to be recognised by Proxmox: <https://forum.proxmox.com/threads/how-to-mount-second-partition-or-disk.13215/>
+
+Proxmos post-install scripts (auto set no-sub repo): <https://tteck.github.io/Proxmox/>  
+Also get dark theme from same link.
