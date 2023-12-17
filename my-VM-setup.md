@@ -60,6 +60,24 @@ The `diskYsZ` referred is something that looks like `disk1s0`.
 
 The point to press `Escape` is when the TianaCore screen appears. Pressing `Esc` here enters the 'bios' of the VM.
 
+For Ubuntu VM:
+
+Need to use RDP beause VNC does not enable remote login, and gnome does not allow remote login: <https://askubuntu.com/questions/1411504/connect-when-remote-desktop-is-on-login-screen-or-screen-locked-without-autolog>
+
+Somehow need to use proprietary remote system on Gnome for VNC: <https://askubuntu.com/questions/1461225/remmina-vnc-how-to-automatically-accept-connection>
+
+Apparently gnome built-in RDP kinda works? <https://askubuntu.com/questions/1422263/rdp-on-ubuntu-desktop-22-04/1427768#1427768>
+
+Should just setup xRDP using easy script: <https://c-nergy.be/blog/?cat=79>
+
+Strategies to remotely connect to VM via internet: <https://www.helpwire.app/blog/remote-desktop-over-internet/>
+
+Port forwarding for remote connection to VM: <https://askubuntu.com/questions/1267872/remote-desktop-access-between-2-ubuntu-20-04-devices-over-the-internet>
+
+Make custom qcow2 image at easy accessible location (to be transferred elsewhere if so desired): <https://serverfault.com/questions/731417/how-do-you-create-a-qcow2-file-that-is-small-yet-commodious-on-a-linux-server>
+
+To resize qcow2 image: <https://gist.github.com/joseluisq/2fcf26ff1b9c59fe998b4fbfcc388342>
+
 ### Proxmox
 
 On adding second drives to the computer to be added to be recognised by Proxmox: <https://forum.proxmox.com/threads/how-to-mount-second-partition-or-disk.13215/>
@@ -68,3 +86,20 @@ Proxmos post-install scripts (auto set no-sub repo): <https://tteck.github.io/Pr
 Also get dark theme from same link.
 
 Set static local IP address on Ubuntu VMs: <https://www.freecodecamp.org/news/setting-a-static-ip-in-ubuntu-linux-ip-address-tutorial/>
+
+Use SPICE to connect remotely to VMs on Proxmox: <https://www.reddit.com/r/homelab/comments/16e5fum/whats_your_preferred_remote_desktop_solution_to/>  
+
+<https://codecisions.com/adding-spice-to-your-proxmox-virtual-machine/#:~:text=To%20connect%2C%20you%20need%20a,connect%20you%20to%20the%20VM>.
+
+Can also self host a Guacamole instance for browser-based remote connection.
+
+### Proxying
+
+2 options:
+
+1. Nginx Proxy Manager:
+<https://www.youtube.com/watch?v=GarMdDTAZJo>
+
+2. Cloudflare Tunnel
+<https://noted.lol/say-goodbye-to-reverse-proxy-and-hello-to-cloudflare-tunnels/>
+<https://www.youtube.com/watch?v=hrwoKO7LMzk>
