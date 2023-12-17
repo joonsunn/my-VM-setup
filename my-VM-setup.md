@@ -103,3 +103,5 @@ Can also self host a Guacamole instance for browser-based remote connection.
 2. Cloudflare Tunnel
 <https://noted.lol/say-goodbye-to-reverse-proxy-and-hello-to-cloudflare-tunnels/>
 <https://www.youtube.com/watch?v=hrwoKO7LMzk>
+
+Can also look into Traefik
