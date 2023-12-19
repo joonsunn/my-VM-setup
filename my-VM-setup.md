@@ -76,6 +76,10 @@ Port forwarding for remote connection to VM: <https://askubuntu.com/questions/12
 
 Make custom qcow2 image at easy accessible location (to be transferred elsewhere if so desired): <https://serverfault.com/questions/731417/how-do-you-create-a-qcow2-file-that-is-small-yet-commodious-on-a-linux-server>
 
+```bash
+qemu-img create -f qcow2 foobar.qcow2 100M
+```
+
 To resize qcow2 image: <https://gist.github.com/joseluisq/2fcf26ff1b9c59fe998b4fbfcc388342>
 
 ### Proxmox
