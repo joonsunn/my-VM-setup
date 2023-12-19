@@ -105,3 +105,8 @@ Can also self host a Guacamole instance for browser-based remote connection.
 <https://www.youtube.com/watch?v=hrwoKO7LMzk>
 
 Can also look into Traefik
+
+### Remote access
+
+Use PiVPN <https://www.pivpn.io/>, set up wireguard.
+
