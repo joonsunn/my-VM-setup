@@ -103,7 +103,8 @@ Can also self host a Guacamole instance for browser-based remote connection.
 Virtual GPU passthrough: <https://www.youtube.com/watch?v=gkzrAYQHtk4>  
 <https://forum.proxmox.com/threads/virtgl-proxmox-7-3-guides-on-how-to-set-up-what-kind-of-performance-to-expect.118575/>
 <https://pve.proxmox.com/pve-docs/chapter-qm.html#qm_display>  
-<https://forum.proxmox.com/threads/virglrenderer-for-3d-support.61801/page-3#post-466767>  
+<https://forum.proxmox.com/threads/virglrenderer-for-3d-support.61801/page-3#post-466767>   
+VirGL drivers: <https://www.reddit.com/r/Proxmox/comments/v6p0om/amd_5750g_virgl_initial_benchmarks/>    
 
 Getting audio to work:
 <https://forum.proxmox.com/threads/noob-guide-to-getting-audio-to-work-in-linux-guests.127369/>
