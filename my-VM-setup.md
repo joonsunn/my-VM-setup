@@ -89,6 +89,9 @@ On adding second drives to the computer to be added to be recognised by Proxmox:
 Proxmos post-install scripts (auto set no-sub repo): <https://tteck.github.io/Proxmox/>  
 Also get dark theme from same link.
 
+Resize local-lvm: <https://forum.proxmox.com/threads/resize-local-or-local-lvm-and-how.105263/>  
+<https://youtu.be/_u8qTN3cCnQ?si=Sd3orctmIfyvu4a6&t=885>  
+
 Set static local IP address on Ubuntu VMs: <https://www.freecodecamp.org/news/setting-a-static-ip-in-ubuntu-linux-ip-address-tutorial/>
 
 Use SPICE to connect remotely to VMs on Proxmox: <https://www.reddit.com/r/homelab/comments/16e5fum/whats_your_preferred_remote_desktop_solution_to/>  
@@ -96,6 +99,24 @@ Use SPICE to connect remotely to VMs on Proxmox: <https://www.reddit.com/r/homel
 <https://codecisions.com/adding-spice-to-your-proxmox-virtual-machine/#:~:text=To%20connect%2C%20you%20need%20a,connect%20you%20to%20the%20VM>.
 
 Can also self host a Guacamole instance for browser-based remote connection.
+
+Virtual GPU passthrough: <https://www.youtube.com/watch?v=gkzrAYQHtk4>  
+<https://forum.proxmox.com/threads/virtgl-proxmox-7-3-guides-on-how-to-set-up-what-kind-of-performance-to-expect.118575/>
+<https://pve.proxmox.com/pve-docs/chapter-qm.html#qm_display>  
+<https://forum.proxmox.com/threads/virglrenderer-for-3d-support.61801/page-3#post-466767>  
+
+Getting audio to work:
+<https://forum.proxmox.com/threads/noob-guide-to-getting-audio-to-work-in-linux-guests.127369/>
+
+Use `tasksel` to install Desktop Environment (applicable for all Linux distro).
+
+Proper iGPU passthrough for AMD Ryzen 7 7735HS:
+<https://pve.proxmox.com/wiki/PCI_Passthrough#AMD_specific_issues>  
+reset bug: <https://www.nicksherlock.com/2020/11/working-around-the-amd-gpu-reset-bug-on-proxmox/#comment-60032>  
+<https://forum.proxmox.com/threads/amd-rx-550-gpu-passthrough-issues.128405/#post-574818>  
+Alternative instructions:
+<https://forum.proxmox.com/threads/have-anyone-susscesfully-passthroughed-the-igpu-amd-radeon-680m-to-vm.119178/page-4>  
+<https://github.com/isc30/ryzen-7000-series-proxmox>  
 
 ### Proxying
 
@@ -114,3 +135,8 @@ Can also look into Traefik
 
 Use PiVPN <https://www.pivpn.io/>, set up wireguard.
 
+### Debian shenanigans
+
+Don't bother with Debian. Kubuntu works perfectly with audio working and xRDP install no issues. Was not able to get xRDP working on Debian.
+
+Not in sudoers' file: <https://www.youtube.com/watch?v=okuO3fRbupw>
