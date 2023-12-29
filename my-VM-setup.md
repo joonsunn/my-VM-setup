@@ -62,6 +62,8 @@ The point to press `Escape` is when the TianaCore screen appears. Pressing `Esc`
 
 For Ubuntu VM:
 
+Install extensions manager properly so that can instal dash to panel: <https://askubuntu.com/questions/1466647/extension-manager-crashes-on-ubuntu-23-04>
+
 Need to use RDP beause VNC does not enable remote login, and gnome does not allow remote login: <https://askubuntu.com/questions/1411504/connect-when-remote-desktop-is-on-login-screen-or-screen-locked-without-autolog>
 
 Somehow need to use proprietary remote system on Gnome for VNC: <https://askubuntu.com/questions/1461225/remmina-vnc-how-to-automatically-accept-connection>
