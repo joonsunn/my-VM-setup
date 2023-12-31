@@ -121,6 +121,8 @@ Alternative instructions:
 <https://forum.proxmox.com/threads/have-anyone-susscesfully-passthroughed-the-igpu-amd-radeon-680m-to-vm.119178/page-4>  
 <https://github.com/isc30/ryzen-7000-series-proxmox>  
 
+Forwarding port from VM inside proxmox to be accessed by network: <https://www.youtube.com/watch?v=RW1pwM94rvQ>
+
 ### Proxying
 
 2 options:
