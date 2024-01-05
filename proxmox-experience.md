@@ -122,9 +122,12 @@ Network: LAN
 
 ![Alt text](image-1.png)
 
-Also added `pulse_latency_ms=50` to `~/.local/share/remmina/[group-rdp-VM_NAME_IN_REMMINA-IP_ADDRESS.remmina]`. Not sure if it works, but solution is from Google Bard, but no other source mentioned this setting.
+Seem like adding `latency:175` made an actual difference to sounds latency, less crackly/choppy sound.
 
-![Alt text](image-3.png)
+![Alt text](image-5.png)
+
+From official docs:
+![Alt text](image-6.png)
 
 Fix choppy audio by making sure `pulseaudio` is started:
 
