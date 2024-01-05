@@ -110,17 +110,6 @@ chmod +x  xrdp-installer-1.4.8.sh
 Remember the `-s` flag!!!
 TODO: Investigate the `-c` flag for custom installation with compilation from source. Necessary?
 
-Below strikethrough section are kept for historical reasons. Not necessary to follow.
-
-~~In improving xRDP performance, tried: <https://superuser.com/questions/1539900/slow-ubuntu-remote-desktop-using-xrdp>~~
-~~Also read: <https://askubuntu.com/questions/1283709/xrdp-and-xfce4-ubuntu-18-04-unusable/1283785#1283785>~~
-
-~~Made modifications as follows: <https://askubuntu.com/questions/1323601/xrdp-is-quite-slow>~~
-
-~~Also added xrdp.conf: <https://www.suse.com/support/kb/doc/?id=000021159>~~
-
-^^^ End Strikethrough ^^^
-
 Machine settings: <https://forum.proxmox.com/threads/solved-vms-linux-and-windows-very-slow-and-laggy.104469/>  
 Changed machine to q35
 Changed CPU to HOST
@@ -137,6 +126,34 @@ Also added `pulse_latency_ms=50` to `~/.local/share/remmina/[group-rdp-VM_NAME_I
 
 ![Alt text](image-3.png)
 
+Fix choppy audio by making sure `pulseaudio` is started:
+
+```bash
+pulseaudio --version
+pulseaudio --start
+```
+
+Can try restart `pulseaudio`
+
+```bash
+pulseaudio -k
+```
+
+Somehow sometimes running `-k` after starting `pulseaudio` makes audio smoother. Not sure why.
+
+If `pulseaudio` not installed: <https://itslinuxfoss.com/install-pulseaudio-ubuntu-22-04/>
+
+
+Also tried uninstall default Remmina, and install the Flatpak version. On KDE Plasma need to install the Flatpak backend support plugin first, but the Remmina Flatpak file will automatically prompt to instll it on first click. <https://flathub.org/apps/org.remmina.Remmina>
+
+For some reason, Flatpak Remmina is light theme only.
+
+Flatpak Remmina has more codec options
+
+![Alt text](image-4.png)
+
+But Flatpak version uses different directory for settings, so previous changes made in Snap Remmina is not carried over.
+
 Alternative remote desktop solution: FreeRDP
 
 check if FreeRDP is installed:
@@ -150,9 +167,8 @@ Then make connection:
 ```bash
 xfreerdp -f /u:[username] /p:[password] /v:[IP of destination] /sound:sys:pulse /dynamic-resolution +clipboard /network:lan /gfx:rfx /bpp:32 /sound:latency:20
 ```
-Not sure how to get fullscreen toggle to work, because `CRTL+ALT+ENTER` never worked for me. Due to this, I still prefer Remmina. But need to find a way to make the options bar in Remmina dark instead of current white theme.
 
-Note: ~~strikethrough~~ parts kept for historical reasons. Not necessary to adopt.
+Not sure how to get fullscreen toggle to work, because `CRTL+ALT+ENTER` never worked for me. Due to this, I still prefer Remmina. But need to find a way to make the options bar in Remmina dark instead of current white theme.
 
 ## Misc
 
@@ -166,3 +182,43 @@ To connect to specific BSSID:
 `Settings` -> `Connections` -> `BBSID` dropdown
 
 ![Alt text](image-2.png)
+
+Use XPIPE as a general SSH manager: <https://xpipe.io/download>
+Mainly use XPIPE to send files.
+
+Need to start `ssh` server on host PC:
+
+```bash
+sudo apt-get install openssh-server
+sudo service ssh status
+```
+
+Then need to allow port 22 in `ufw`:
+
+```bash
+sudo ufw allow ssh 
+```
+
+For RDP apparently proper installation requires opening port 3389 on UFW:
+
+```bash
+sudo ufw allow 3389
+```
+
+Then:
+
+```bash
+sudo ufw status
+```
+
+If not started, then
+
+```bash
+sudo ufw enable
+```
+
+To kill firewall:
+
+```bash
+sudo ufw disable
+```
