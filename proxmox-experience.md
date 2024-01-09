@@ -158,7 +158,6 @@ Somehow sometimes running `-k` after starting `pulseaudio` makes audio smoother.
 
 If `pulseaudio` not installed: <https://itslinuxfoss.com/install-pulseaudio-ubuntu-22-04/>
 
-
 Also tried uninstall default Remmina, and install the Flatpak version. On KDE Plasma need to install the Flatpak backend support plugin first, but the Remmina Flatpak file will automatically prompt to instll it on first click. <https://flathub.org/apps/org.remmina.Remmina>
 
 For some reason, Flatpak Remmina is light theme only.
@@ -240,28 +239,34 @@ sudo ufw disable
 
 ## virGL
 
-Install VirGL drivers: <https://www.reddit.com/r/Proxmox/comments/v6p0om/amd_5750g_virgl_initial_benchmarks/>
+Install VirGL drivers: <https://www.reddit.com/r/Proxmox/comments/v6p0om/amd_5750g_virgl_initial_benchmarks/>  
 
-Only able to get `glxgears -info` to show virGL when accessing VM through Proxmox shell. When accessing through xRDP, can only get `llvmpipe` no matter what.
+Only able to get `glxgears -info` to show virGL when accessing VM through Proxmox shell. When accessing through xRDP, can only get `llvmpipe` no matter what.  
+  
+Other ways to check:  
 
-Other ways to check:
+`glxinfo -B`  
+`dmesg | grep vga`  
+`dmesg | grep virgl`  
 
-`glxinfo -B`
-`dmesg | grep vga`
-`dmesg | grep virgl`
+Went through GPU passthrough, but still showing `llvmpipe`, with suboptimal FPS when playing youtube 1080p60fps.  
 
-Went through GPU passthrough, but still showing `llvmpipe`, with suboptimal FPS when playing youtube 1080p60fps.
+Even went as far as modifying xRDP Easy Install script to include `--enable glamour` at the vonfigure step of `XRDP` and `XORG`, still no changes. Info from : <https://gist.github.com/rkkoszewski/aa531cee7126edf329b76bdd0546f502>  
 
-Even went as far as modifying xRDP Easy Install script to include `--enable glamour` at the vonfigure step of `XRDP` and `XORG`, still no changes.
+TODO: To investigate further.  
 
-TODO: To investigate further.
+Perhaps `X11Forwarding` is the answer? <https://stackoverflow.com/questions/61590691/the-xauthority-file-is-not-does-not-existhence-via-local-ssh-connection-displa>
 
 
+On switching display manager: <https://techpiezo.com/linux/switch-display-manager-in-ubuntu-20-04/>  
+
+On `lightdm` greeter: <https://www.reddit.com/r/archlinux/comments/nr6sb2/new_to_arch_cant_start_lightdm/>  
+ 
 ## Windows VM creation
 
 Need to pre-load virt-io driver iso, because drivers are needed to detect drives in the first step of installation. Select the appropriate `win` version when loading drivers to proceed.
 
-Initial hiccup is that Windows 11 installation unable to proceed without network connection (no button to click next), need to reboot into `no network mode`: https://learn.microsoft.com/en-us/answers/questions/1179311/windows-11-setup-without-internet
+Initial hiccup is that Windows 11 installation unable to proceed without network connection (no button to click next), need to reboot into `no network mode`: <https://learn.microsoft.com/en-us/answers/questions/1179311/windows-11-setup-without-internet>
 
 Click `SHIFT+F10`
 
@@ -282,3 +287,5 @@ Sound works out of the box in Win11. Youtube on Chrome works great without addit
 For max scrolling performance, use `GFX AVC444` color depth in Remmina.
 
 Display scaling is wonky on Win11 VM via RDP. The clock at the taskbar is never affected by any DPI or text size setting. Just set Display Scaling to 125% and be done with it.
+
+VirGL drivers for Windows still work in progress: <https://github.com/virtio-win/kvm-guest-drivers-windows/pull/943>
