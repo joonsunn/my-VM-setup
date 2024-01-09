@@ -69,7 +69,7 @@ At Datacenter -> Storage -> `local` -> Edit -> Content -> Click everything.
 
 VM creation should now be possible in `local`.
 
-## VirGL
+## VirGL on Proxmox VE
 
 Ran the following commands:
 
@@ -237,7 +237,7 @@ To kill firewall:
 sudo ufw disable
 ```
 
-## virGL
+## virGL on Ubuntu Vm
 
 Install VirGL drivers: <https://www.reddit.com/r/Proxmox/comments/v6p0om/amd_5750g_virgl_initial_benchmarks/>  
 
