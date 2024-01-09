@@ -80,7 +80,7 @@ sudo apt install libgl1 libegl1
 
 2nd command above returned that all libraries are latest, so it could be unnecessary to run.
 
-## VM creation
+## Kubuntu VM creation
 
 First creation: all defaults, 50GB, 16GB RAM, 8 cores. Tick Qemu-Agent checkbox.
 Bunch of SQUASHFS errors appeared during first reboot after installation. Does not want to reboot properly. Killed it with force off, and it booted up normally.
@@ -111,10 +111,22 @@ Remember the `-s` flag!!!
 TODO: Investigate the `-c` flag for custom installation with compilation from source. Necessary?
 
 Machine settings: <https://forum.proxmox.com/threads/solved-vms-linux-and-windows-very-slow-and-laggy.104469/>  
-Changed machine to q35
-Changed CPU to HOST
+Changed machine to q35  
+Changed CPU to HOST  
 
-WHAT FINALLY WORKED:  
+At destination machine:
+
+```bash
+sudo nano /etc/xrdp/xrdp.ini
+```
+
+Make following changes:
+
+```bash
+tcp_send_buffer_bytes=4194304
+crypt_level=low
+```
+
 Remmina settings:
 
 Color settings: GFX 32bpp  
@@ -225,3 +237,48 @@ To kill firewall:
 ```bash
 sudo ufw disable
 ```
+
+## virGL
+
+Install VirGL drivers: <https://www.reddit.com/r/Proxmox/comments/v6p0om/amd_5750g_virgl_initial_benchmarks/>
+
+Only able to get `glxgears -info` to show virGL when accessing VM through Proxmox shell. When accessing through xRDP, can only get `llvmpipe` no matter what.
+
+Other ways to check:
+
+`glxinfo -B`
+`dmesg | grep vga`
+`dmesg | grep virgl`
+
+Went through GPU passthrough, but still showing `llvmpipe`, with suboptimal FPS when playing youtube 1080p60fps.
+
+Even went as far as modifying xRDP Easy Install script to include `--enable glamour` at the vonfigure step of `XRDP` and `XORG`, still no changes.
+
+TODO: To investigate further.
+
+
+## Windows VM creation
+
+Need to pre-load virt-io driver iso, because drivers are needed to detect drives in the first step of installation. Select the appropriate `win` version when loading drivers to proceed.
+
+Initial hiccup is that Windows 11 installation unable to proceed without network connection (no button to click next), need to reboot into `no network mode`: https://learn.microsoft.com/en-us/answers/questions/1179311/windows-11-setup-without-internet
+
+Click `SHIFT+F10`
+
+In the command prompt that appears:
+
+`OOBE\BYPASSNRO`
+
+Installation will reboot and proceed. However upon first boot, network will be unavailable. So reboot and network will be working.
+
+First thing to install is virt-io drivers and virtio-win-guest-tools from the virtio iso.
+
+Then need to install ExplorePatcher to make start menu show all apps instead of pinned apps: <https://github.com/valinet/ExplorerPatcher>
+
+For RDP: Enable RDP in RDP settings.
+
+Sound works out of the box in Win11. Youtube on Chrome works great without additional settings.
+
+For max scrolling performance, use `GFX AVC444` color depth in Remmina.
+
+Display scaling is wonky on Win11 VM via RDP. The clock at the taskbar is never affected by any DPI or text size setting. Just set Display Scaling to 125% and be done with it.
