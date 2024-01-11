@@ -255,13 +255,20 @@ Even went as far as modifying xRDP Easy Install script to include `--enable glam
 
 TODO: To investigate further.  
 
-Perhaps `X11Forwarding` is the answer? <https://stackoverflow.com/questions/61590691/the-xauthority-file-is-not-does-not-existhence-via-local-ssh-connection-displa>
+Check Virtualization is available on CPU:
 
+```bash
+cat /proc/cpuinfo | grep vmx svm
+```
+
+Perhaps `X11Forwarding` is the answer? <https://stackoverflow.com/questions/61590691/the-xauthority-file-is-not-does-not-existhence-via-local-ssh-connection-displa>
 
 On switching display manager: <https://techpiezo.com/linux/switch-display-manager-in-ubuntu-20-04/>  
 
 On `lightdm` greeter: <https://www.reddit.com/r/archlinux/comments/nr6sb2/new_to_arch_cant_start_lightdm/>  
- 
+
+Forum thread to follow on progress of virGL (virtio-vga-gl): <https://forum.proxmox.com/threads/virglrenderer-for-3d-support.61801/page-4#:~:text=Yes%2C%20VGA%20==%20GPU%2C%20so%20VirtioGPU%20is,CLI/API%20or%20even%20Web%20UI.%20chrcoluk%20said>:.
+
 ## Windows VM creation
 
 Need to pre-load virt-io driver iso, because drivers are needed to detect drives in the first step of installation. Select the appropriate `win` version when loading drivers to proceed.
@@ -289,3 +296,197 @@ For max scrolling performance, use `GFX AVC444` color depth in Remmina.
 Display scaling is wonky on Win11 VM via RDP. The clock at the taskbar is never affected by any DPI or text size setting. Just set Display Scaling to 125% and be done with it.
 
 VirGL drivers for Windows still work in progress: <https://github.com/virtio-win/kvm-guest-drivers-windows/pull/943>
+
+## GPU Passthrough
+
+Below procedure taken from: <https://forum.proxmox.com/threads/pci-gpu-passthrough-on-proxmox-ve-8-installation-and-configuration.130218/>
+
+1) editting `/etc/default/grub`
+
+```bash
+GRUB_CMDLINE_LINUX_DEFAULT="quiet  iommu=pt"
+update-grub
+reboot
+```
+
+Alternative config if passthrough fails:
+
+```bash
+GRUB_CMDLINE_LINUX_DEFAULT="quiet iommu=pt nomodeset pcie_acs_override=downstream initcall_blacklist=sysfb_init"
+```
+
+Another alternative config:
+
+```bash
+GRUB_CMDLINE_LINUX_DEFAULT="quiet iommu=pt pcie_acs_override=downstream,multifunction nofb nomodeset video=vesafb:off,efifb:off"
+```
+
+Extreme config:
+
+```bash
+GRUB_CMDLINE_LINUX_DEFAULT="quiet iommu=pt pcie_acs_override=downstream,multifunction video=efifb:off video=vesa:off vfio-pci.ids=10de:13bb,10de:0fb vfio_iommu_type1.allow_unsafe_interrupts=1 kvm.ignore_msrs=1 modprobe.blacklist=radeon,nouveau,nvidia,nvidiafb,nvidia-gpu"
+```
+
+From: <https://www.reddit.com/r/homelab/comments/b5xpua/the_ultimate_beginners_guide_to_gpu_passthrough/>  
+Also: <https://www.reddit.com/r/Proxmox/comments/lcnn5w/proxmox_pcie_passthrough_in_2_minutes/>  
+Further reading: <https://www.reddit.com/r/homelab/comments/11l0s5j/boxmox_asrock_4x4_box_5800u_jbod_proxmox/>  
+Graphical gudie (ignore part about vfio_virqfd): <https://3os.org/infrastructure/proxmox/gpu-passthrough/igpu-passthrough-to-vm/#linux-virtual-machine-igpu-passthrough-configuration>  
+More: <https://github.com/isc30/ryzen-7000-series-proxmox>  
+
+2) editting `/etc/modules`
+
+Add the following lines:
+
+```bash
+vfio
+vfio_iommu_type1
+vfio_pci
+```
+
+Then run:
+
+```bash
+update-initramfs -u -k all
+systemctl reboot
+```
+
+Verify status of VFIO:
+
+```bash
+dmesg | grep -i vfio
+```
+
+Should see something similar to:`[ 7.262027] VFIO - User Level meta-driver version: 0.3`
+
+3) Verify remapping:
+
+```bash
+dmesg | grep 'remapping'
+```
+
+Should see `AMD-Vi: Interrupt remapping enabled` or `DMAR-IR: Enabled IRQ remapping in x2apic mode`
+
+Else:
+
+```bash
+echo "options vfio_iommu_type1 allow_unsafe_interrupts=1" > /etc/modprobe.d/iommu_unsafe_interrupts.conf
+```
+
+4) Additional AMD setup (and driver block):
+
+```bash
+apt install pve-headers-$(uname -r)
+apt install git dkms build-essential
+git clone https://github.com/gnif/vendor-reset.git
+cd vendor-reset
+dkms install .
+echo "vendor-reset" >> /etc/modules
+update-initramfs -u
+shutdown -r now
+```
+
+Retrieve PCI ID of GPU:
+
+```bash
+lspci -nn | grep 'AMD'
+```
+
+For 7735HS, results include:
+
+```bash
+...
+05:00.0 VGA compatible controller [0300]: Advanced Micro Devices, Inc. [AMD/ATI] Rembrandt [Radeon 680M] [1002:1681] (rev 0a)
+05:00.1 Audio device [0403]: Advanced Micro Devices, Inc. [AMD/ATI] Rembrandt Radeon High Definition Audio Controller [1002:1640]
+...
+```
+
+In this case, PCI ID for GPU is `05:00.0`.
+
+Full extracted info is:
+
+```bash
+GPU: 1002:1681
+Audio: 1002:1640
+```
+
+Next create the service for vendor reset (AMD bug):
+
+```bash
+cat << EOF >>  /etc/systemd/system/vreset.service
+[Unit]
+Description=AMD GPU reset method to 'device_specific'
+After=multi-user.target
+[Service]
+ExecStart=/usr/bin/bash -c 'echo device_specific > /sys/bus/pci/devices/0000:05:00.0/reset_method'
+[Install]
+WantedBy=multi-user.target
+EOF
+systemctl enable vreset.service && systemctl start vreset.service
+```
+
+Should see a bunch of dmesg during start up (example, 7735HS is not POLARIS):
+
+```bash
+[57709.971750] vfio-pci 0000:01:00.0: AMD_POLARIS10: version 1.1
+[57709.971755] vfio-pci 0000:01:00.0: AMD_POLARIS10: performing pre-reset
+[57709.971881] vfio-pci 0000:01:00.0: AMD_POLARIS10: performing reset
+[57709.971885] vfio-pci 0000:01:00.0: AMD_POLARIS10: CLOCK_CNTL: 0x0, PC: 0x2055c
+[57709.971889] vfio-pci 0000:01:00.0: AMD_POLARIS10: Performing BACO reset
+[57710.147491] vfio-pci 0000:01:00.0: AMD_POLARIS10: performing post-reset
+[57710.171814] vfio-pci 0000:01:00.0: AMD_POLARIS10: reset result = 0
+```
+
+Perform Soft deps to block drivers from loading on host:
+
+```bash
+echo "options vfio-pci ids=1002:1681,1002:1640" >> /etc/modprobe.d/vfio.conf
+# For AMD
+echo "softdep radeon pre: vfio-pci" >> /etc/modprobe.d/vfio.conf
+echo "softdep amdgpu pre: vfio-pci" >> /etc/modprobe.d/vfio.conf
+echo "softdep snd_hda_intel pre: vfio-pci" >> /etc/modprobe.d/vfio.conf
+echo "softdep xhci_pci pre: vfio-pci" >> /etc/modprobe.d/vfio.conf
+# For Nvidia
+echo "softdep nouveau pre: vfio-pci" >> /etc/modprobe.d/vfio.conf
+echo "softdep nvidia pre: vfio-pci" >> /etc/modprobe.d/vfio.conf
+echo "softdep nvidiafb pre: vfio-pci" >> /etc/modprobe.d/vfio.conf
+echo "softdep nvidia_drm pre: vfio-pci" >> /etc/modprobe.d/vfio.conf
+echo "softdep drm pre: vfio-pci" >> /etc/modprobe.d/vfio.conf
+# For Intel
+echo "softdep snd_hda_intel pre: vfio-pci" >> /etc/modprobe.d/vfio.conf
+echo "softdep snd_hda_codec_hdmi pre: vfio-pci" >> /etc/modprobe.d/vfio.conf
+echo "softdep i915 pre: vfio-pci" >> /etc/modprobe.d/vfio.conf
+```
+
+If softdeps don't work, then need to proceed to blacklist drivers:
+
+```bash
+echo "options vfio-pci ids=1002:1681,1002:1640" >> /etc/modprobe.d/vfio.conf
+```
+
+Skip above if already done before.
+
+```bash
+# AMD drivers
+echo "blacklist radeon" >> /etc/modprobe.d/blacklist.conf
+echo "blacklist amdgpu" >> /etc/modprobe.d/blacklist.conf
+# NVIDIA drivers
+echo "blacklist nouveau" >> /etc/modprobe.d/blacklist.conf
+echo "blacklist nvidia" >> /etc/modprobe.d/blacklist.conf
+echo "blacklist nvidiafb" >> /etc/modprobe.d/blacklist.conf
+echo "blacklist nvidia_drm" >> /etc/modprobe.d/blacklist.conf
+# Intel drivers
+echo "snd_hda_intel" >> /etc/modprobe.d/blacklist.conf
+echo "snd_hda_codec_hdmi" >> /etc/modprobe.d/blacklist.conf
+echo "i915" >> /etc/modprobe.d/blacklist.conf
+```
+
+Additional checking stuff can be found from Proxmox forum post above.
+
+In the VM conf file: <https://nopresearcher.github.io/Proxmox-GPU-Passthrough-Ubuntu/>
+
+```bash
+nano /etc/pve/qemu-server/(VMID).conf
+hostpci0: 01:00,x-vga=on
+```
+
+Make sure `,x-vga=on` is included.
