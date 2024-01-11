@@ -103,9 +103,15 @@ Install XRDP Easy Install script (just google and navigate the website to get la
 ```bash
 wget https://www.c-nergy.be/downloads/xRDP/xrdp-installer-1.4.8.zip
 unzip xrdp-installer-1.4.8.zip 
-chmod +x  xrdp-installer-1.4.8.sh
-./xrdp-installer-1.4.8.sh -s
+chmod +x xrdp-installer-1.4.8.sh
+nano xrdp-installer-1.4.8.sh
+===== add --enable-glamor flags in configure. See below =====
+ ./xrdp-installer-1.4.8.sh -s
 ```
+
+Modify xRDP Easy Install script to include `--enable glamour` at the vonfigure step of `XRDP` and `XORG`, still no changes to virGL over XRDP. Info from : <https://gist.github.com/rkkoszewski/aa531cee7126edf329b76bdd0546f502>  
+
+`--enable-glamor --enable-rfxcodec --enable-mp3lame --enable-fdkaac --enable-opus --enable-pixman --enable-fuse --enable-jpeg --enable-ipv6`
 
 Remember the `-s` flag!!!
 TODO: Investigate the `-c` flag for custom installation with compilation from source. Necessary?
@@ -250,8 +256,6 @@ Other ways to check:
 `dmesg | grep virgl`  
 
 Went through GPU passthrough, but still showing `llvmpipe`, with suboptimal FPS when playing youtube 1080p60fps.  
-
-Even went as far as modifying xRDP Easy Install script to include `--enable glamour` at the vonfigure step of `XRDP` and `XORG`, still no changes. Info from : <https://gist.github.com/rkkoszewski/aa531cee7126edf329b76bdd0546f502>  
 
 TODO: To investigate further.  
 
