@@ -494,3 +494,54 @@ hostpci0: 01:00,x-vga=on
 ```
 
 Make sure `,x-vga=on` is included.
+
+## Moonlight/Sunshine
+
+Having xRDP stubbornly only use `llvmpipe`, and GPU passthrough seeming to not make a difference over xRDP, decided to use Moonlight/Sunshine. Previous attempts using Flatpak package yielded subpar performance.
+
+Host/server side, installed the latest package at LizardByte github: <https://github.com/LizardByte/Sunshine/releases>
+
+After downloading the `sunshine-ubuntu-22.04-{arch}.deb` file, install:
+
+```bash
+sudo apt install -f ./sunshine-{ubuntu-version}.deb
+```
+
+Before starting `sunshine` service, need to login to VM from Proxmox shell, just in case previous step was done via xRDP or other means. Starting `sunshine` will not work over xRDP because it needs a display to attach to, which xRDP is alreayd occupying if currenty connected via xRDP.
+
+To start `sunshine` service after installed and logged in via Proxmox shell, run:
+
+```bash
+sunshine
+```
+
+Then a bunch of mumbo jumpa will appear in the terminal, culminating with something that looks like:
+
+```bash
+Configuration UI available at [https://localhost:47990]
+```
+
+Point browser to `https://localhost:47990` on host/server, then set up `username` and `password`.
+
+Then install `moonlight` on client PC: <https://github.com/moonlight-stream/moonlight-qt/releases>
+
+I chose to install via Snap store: <https://snapcraft.io/moonlight>
+
+```bash
+sudo snap install moonlight
+```
+
+Then open `moonlight` from app menu. Had to manually add host/server IP via [+] icon at top right to get it to detect.
+
+Moonlight settings:
+
+```bash
+resolution: 1920x1080
+frame rate: 60fps
+Video bitrate: 20Mbps (higher causes crackly audio)
+Optimise mouse for remote desktop: OFF
+```
+
+Need to have access to both client and server to establish connection, because need to type in PIN at server side to pair the devices for connection.
+
+Full desktop is piped through. Since no new session is started, no problem with virGL.
