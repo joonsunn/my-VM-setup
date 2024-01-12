@@ -547,3 +547,5 @@ Need to have access to both client and server to establish connection, because n
 Full desktop is piped through. Since no new session is started, no problem with virGL.
 
 If got problem establishing connection, might have to open ports on server side. Required ports are shown in Web UI -> Advanced.
+
+Downside to `moonlight` is that need to login to server device to start the `sunshine` service, which means no autologin/start on bootup.
