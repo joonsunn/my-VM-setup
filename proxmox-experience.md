@@ -495,9 +495,9 @@ hostpci0: 01:00,x-vga=on
 
 Make sure `,x-vga=on` is included.
 
-## Moonlight/Sunshine
+## Moonlight+Sunshine
 
-Having xRDP stubbornly only use `llvmpipe`, and GPU passthrough seeming to not make a difference over xRDP, decided to use Moonlight/Sunshine. Previous attempts using Flatpak package yielded subpar performance.
+Having xRDP stubbornly only use `llvmpipe`, and GPU passthrough seeming to not make a difference over xRDP, decided to use Moonlight+Sunshine.
 
 Host/server side, installed the latest package at LizardByte github: <https://github.com/LizardByte/Sunshine/releases>
 
@@ -525,7 +525,7 @@ Point browser to `https://localhost:47990` on host/server, then set up `username
 
 Then install `moonlight` on client PC: <https://github.com/moonlight-stream/moonlight-qt/releases>
 
-I chose to install via Snap store: <https://snapcraft.io/moonlight>
+I chose to install via Snap store: <https://snapcraft.io/moonlight> (previous attempt using Flatpak yielded subpar results.)
 
 ```bash
 sudo snap install moonlight
@@ -545,3 +545,5 @@ Optimise mouse for remote desktop: OFF
 Need to have access to both client and server to establish connection, because need to type in PIN at server side to pair the devices for connection.
 
 Full desktop is piped through. Since no new session is started, no problem with virGL.
+
+If got problem establishing connection, might have to open ports on server side. Required ports are shown in Web UI -> Advanced.
