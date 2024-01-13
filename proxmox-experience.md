@@ -563,6 +563,6 @@ ufw allow 48002/udp
 ufw allow 48010/udp
 ```
 
-Downside to `moonlight` is that need to login to server device to start the `sunshine` service, which means no autologin/start on bootup.
+Downside to `moonlight` is that need to login to server device to start the `sunshine` service, which means no autologin/start on bootup, unless specially set up to do from server side (unlike xRDP where connection can be established without needing to be logged in locally first). Reference info (did not execute): <https://forum.level1techs.com/t/how-to-set-up-headless-sunshine-on-ubuntu-server-22-04-with-an-nvidia-gpu/197106>u/197106>
 
-Info on setting up headless sunshine: <https://forum.level1techs.com/t/how-to-set-up-headless-sunshine-on-ubuntu-server-22-04-with-an-nvidia-gpu/197106>
+Windows does not have virGL drivers yet, so no point in installing `sunshine` on it because it will still only use VirtIO drivers, which is software rendering. Though Moonlight automatically detects the server once `sunshine` is properly installed on a Windows VM, without having to input IP address manually.
