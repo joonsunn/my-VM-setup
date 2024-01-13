@@ -243,6 +243,14 @@ To kill firewall:
 sudo ufw disable
 ```
 
+To set time date format: <https://foragoodstrftime.com/>
+
+```bash
+23:27:30
+1 Jan 2024
+%H:%M:%S %n %d %b %Y
+```
+
 ## virGL on Ubuntu Vm
 
 Install VirGL drivers: <https://www.reddit.com/r/Proxmox/comments/v6p0om/amd_5750g_virgl_initial_benchmarks/>  
