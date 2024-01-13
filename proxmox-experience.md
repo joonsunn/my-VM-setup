@@ -501,13 +501,17 @@ Having xRDP stubbornly only use `llvmpipe`, and GPU passthrough seeming to not m
 
 Host/server side, installed the latest package at LizardByte github: <https://github.com/LizardByte/Sunshine/releases>
 
+Exact steps for installation: <https://docs.lizardbyte.dev/projects/sunshine/en/latest/about/installation.html#debian-package>
+
 After downloading the `sunshine-ubuntu-22.04-{arch}.deb` file, install:
 
 ```bash
 sudo apt install -f ./sunshine-{ubuntu-version}.deb
 ```
 
-Before starting `sunshine` service, need to login to VM from Proxmox shell, just in case previous step was done via xRDP or other means. Starting `sunshine` will not work over xRDP because it needs a display to attach to, which xRDP is alreayd occupying if currenty connected via xRDP.
+Before starting `sunshine` service, need to login to VM from Proxmox shell, just in case previous step was done via xRDP or other means. Starting `sunshine` will not work over xRDP because it needs a display to attach to, which xRDP is already occupying if currenty connected via xRDP.
+
+On usage of `sunshine`: <https://docs.lizardbyte.dev/projects/sunshine/en/latest/about/usage.html#usage>
 
 To start `sunshine` service after installed and logged in via Proxmox shell, run:
 
@@ -515,7 +519,7 @@ To start `sunshine` service after installed and logged in via Proxmox shell, run
 sunshine
 ```
 
-Then a bunch of mumbo jumpa will appear in the terminal, culminating with something that looks like:
+Then a bunch of mumbo jumbo will appear in the terminal, culminating with something that looks like:
 
 ```bash
 Configuration UI available at [https://localhost:47990]
@@ -548,4 +552,17 @@ Full desktop is piped through. Since no new session is started, no problem with 
 
 If got problem establishing connection, might have to open ports on server side. Required ports are shown in Web UI -> Advanced.
 
+```bash
+ufw allow 47984/tcp
+ufw allow 47989/tcp
+ufw allow 48010/tcp
+ufw allow 47998/udp
+ufw allow 47999/udp
+ufw allow 48000/udp
+ufw allow 48002/udp
+ufw allow 48010/udp
+```
+
 Downside to `moonlight` is that need to login to server device to start the `sunshine` service, which means no autologin/start on bootup.
+
+Info on setting up headless sunshine: <https://forum.level1techs.com/t/how-to-set-up-headless-sunshine-on-ubuntu-server-22-04-with-an-nvidia-gpu/197106>
