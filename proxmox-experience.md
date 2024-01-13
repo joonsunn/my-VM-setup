@@ -243,7 +243,7 @@ To kill firewall:
 sudo ufw disable
 ```
 
-To set time date format: <https://foragoodstrftime.com/>
+To set time date format (esp for Linux Mint): <https://foragoodstrftime.com/>
 
 ```bash
 23:27:30
