@@ -80,6 +80,58 @@ sudo apt install libgl1 libegl1
 
 2nd command above returned that all libraries are latest, so it could be unnecessary to run.
 
+## Cliffnotes on Linux VM creation to virGL-compatible remtoe desktop
+
+1. Install VM:
+
+   ```bash
+   Proxmox settings:
+   BIOS: default
+   Machine: q35
+   CPU: host
+   SSD emulation: on
+   Discard: on
+   ```
+
+2. Update on successful post-install boot up
+
+   ```bash
+   sudo apt update
+   sudo apt upgrade
+   ```
+
+3. Install stuffs
+
+   * install Chromium from Software Manager
+
+   * ```bash
+      sudo apt install qemu-guest-agent
+      ```
+
+   * ```bash
+      sudo apt install openssh-server
+      ```
+
+4. Install `sunshine`
+
+   Download `sunshine` package from: <https://github.com/LizardByte/Sunshine/releases>
+
+   * ```bash
+      chmod +x sunshine-{ubuntu-version}.deb
+      ```
+
+   * ```bash
+      sudo apt install -f ./sunshine-{ubuntu-version}.deb
+      ```
+
+   * ```bash
+      sunshine
+      ```
+
+   * Enable `UPnP`.
+
+5. Connect using `moonlight` from client side.
+
 ## Kubuntu VM creation
 
 First creation: all defaults, 50GB, 16GB RAM, 8 cores. Tick Qemu-Agent checkbox.
