@@ -639,3 +639,25 @@ Alternatively, turn on `UPnP` in Sunshine Settings under `General`.
 Downside to `moonlight` is that need to login to server device to start the `sunshine` service, which means no autologin/start on bootup, unless specially set up to do from server side (unlike xRDP where connection can be established without needing to be logged in locally first). Reference info (did not execute): <https://forum.level1techs.com/t/how-to-set-up-headless-sunshine-on-ubuntu-server-22-04-with-an-nvidia-gpu/197106>
 
 Windows does not have virGL drivers yet, so no point in installing `sunshine` on it because it will still only use VirtIO drivers, which is software rendering. Though Moonlight automatically detects the server once `sunshine` is properly installed on a Windows VM, without having to input IP address manually.
+
+## Notes on Gnome
+
+Install gnome-shell-extension-manager: <https://github.com/mjakeman/extension-manager>
+
+```bash
+sudo apt install gnome-shell-extension-manager
+```
+
+Remember to check if an extension manager is already installed before installing this one.
+
+Install `Dash to Panel` extension to make taskbar go to bottom like Plasma and Cinnammon.
+
+## Notes on Debian
+
+To activate non-free firmware, open Software Centre, menu, then select non-free repos.
+
+On `sunshine` session, cursor does not appear. To fix, set accessbility zoom level to `1.0`.
+
+Mouse acceleration setting is under Keyboard and Mouse Tweaks. Mouse speed is under mouse settings.
+
+Maximise and Minimise button at window decoration is also under Tweaks.
