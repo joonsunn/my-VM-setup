@@ -251,6 +251,11 @@ To set time date format (esp for Linux Mint): <https://foragoodstrftime.com/>
 %H:%M:%S %n %d %b %Y
 ```
 
+Built-in multi-line non-CLI text editors to be used when editting config files from CLI (instead of using `nano`):
+
+Kubuntu: `kate`  
+Linux Mint: `xed`  
+
 ## virGL on Ubuntu Vm
 
 Install VirGL drivers: <https://www.reddit.com/r/Proxmox/comments/v6p0om/amd_5750g_virgl_initial_benchmarks/>  
@@ -554,6 +559,8 @@ Video bitrate: 20Mbps (higher causes crackly audio)
 Optimise mouse for remote desktop: OFF
 ```
 
+Also need to ensure client side connection is good, preferably connect to 5Ghz WiFi if LAN connection to common router is not possible.
+
 Need to have access to both client and server to establish connection, because need to type in PIN at server side to pair the devices for connection.
 
 Full desktop is piped through. Since no new session is started, no problem with virGL.
@@ -571,6 +578,8 @@ ufw allow 48002/udp
 ufw allow 48010/udp
 ```
 
-Downside to `moonlight` is that need to login to server device to start the `sunshine` service, which means no autologin/start on bootup, unless specially set up to do from server side (unlike xRDP where connection can be established without needing to be logged in locally first). Reference info (did not execute): <https://forum.level1techs.com/t/how-to-set-up-headless-sunshine-on-ubuntu-server-22-04-with-an-nvidia-gpu/197106>u/197106>
+Alternatively, turn on `UPnP` in Sunshine Settings under `General`.
+
+Downside to `moonlight` is that need to login to server device to start the `sunshine` service, which means no autologin/start on bootup, unless specially set up to do from server side (unlike xRDP where connection can be established without needing to be logged in locally first). Reference info (did not execute): <https://forum.level1techs.com/t/how-to-set-up-headless-sunshine-on-ubuntu-server-22-04-with-an-nvidia-gpu/197106>
 
 Windows does not have virGL drivers yet, so no point in installing `sunshine` on it because it will still only use VirtIO drivers, which is software rendering. Though Moonlight automatically detects the server once `sunshine` is properly installed on a Windows VM, without having to input IP address manually.
