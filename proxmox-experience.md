@@ -258,6 +258,10 @@ Linux Mint: `xed`
 
 ## virGL on Ubuntu Vm
 
+`Somehow glxgears is showing better FPS in Linux Mint on virGL than Kubuntu. Youtube also has noticeably less dropped frames. Can consider as alternative to Kubuntu. Maybe virGL drivers not required because glxgears was tested on LMint before installing virGL drivers.`
+
+Below for setup on Kubuntu:
+
 Install VirGL drivers: <https://www.reddit.com/r/Proxmox/comments/v6p0om/amd_5750g_virgl_initial_benchmarks/>  
 
 Only able to get `glxgears -info` to show virGL when accessing VM through Proxmox shell. When accessing through xRDP, can only get `llvmpipe` no matter what.  
