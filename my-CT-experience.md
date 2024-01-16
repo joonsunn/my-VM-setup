@@ -15,7 +15,7 @@
 
     Replace `newuser` with whatever username you choose.
 
-2. Add `newuser` to sudoers file:
+2. Add `newuser` to sudoers file: <https://www.digitalocean.com/community/tutorials/how-to-add-and-delete-users-on-ubuntu-20-04>
 
     ```bash
     nano /etc/sudoers
