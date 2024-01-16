@@ -49,7 +49,7 @@
 
 ## SSH stuff from client side
 
-1. Generate ssh keys to be added to Github:
+1. Generate ssh keys to be added to Github: <https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent?platform=linux>
 
     ```bash
     ssh-keygen -t ed25519 -C "your_email@example.com"
@@ -60,7 +60,7 @@
 
     Copy output and paste into Github ssh keys page.
 
-    Test connection:
+    Test connection: <https://docs.github.com/en/authentication/connecting-to-github-with-ssh/testing-your-ssh-connection>
 
     ```bash
     ssh -T git@github.com
@@ -72,13 +72,21 @@
     Hi newuser! You've successfully authenticated, but GitHub does not provide shell access.
     ```
 
-2. Install `git`.
 
 ## Install VS Code
 
-1. Download VS Code .deb file from VS Code website.
-2. Install via terminal:
+1. Download VS Code .deb file from VS Code website: <https://code.visualstudio.com/download>
+2. Install via terminal: <https://code.visualstudio.com/docs/setup/linux>
 
     ```bash
     sudo apt install ./{code.deb}
+    ```
+
+3. Install `git`.
+4. setup global configs: <https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup>
+
+    ```bash
+    git config --global user.name "John Doe"
+    git config --global user.email johndoe@example.com
+    git config --global core.editor code
     ```
