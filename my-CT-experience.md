@@ -73,3 +73,12 @@
     ```
 
 2. Install `git`.
+
+## Install VS Code
+
+1. Download VS Code .deb file from VS Code website.
+2. Install via terminal:
+
+    ```bash
+    sudo apt install ./{code.deb}
+    ```
