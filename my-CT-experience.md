@@ -115,3 +115,41 @@ Info: <https://www.youtube.com/watch?v=Ax66SnZROKA>
     newgrp docker
     docker run hello-world
     ```
+
+## Install NodeJS
+
+1. Install `nvm`: <https://github.com/nvm-sh/nvm>
+
+    ```bash
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+    ```
+
+2. Make `bash` pickup `nvm`:
+
+    ```bash
+    source ~/.bashrc
+    ```
+
+3. Show list of NPM versions available:
+
+    ```bash
+    nvm list-remote
+    ```
+
+4. Install desired nodejs version:
+
+    ```bash
+    nvm install v20.11.0
+    ```
+
+    Alternatively, can install latest:
+
+    ```bash
+    nvm install node
+    ```
+
+5. Install `npm`:
+
+    ```bash
+    npm install -g npm@latest
+    ```
