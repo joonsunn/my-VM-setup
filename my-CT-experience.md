@@ -72,7 +72,6 @@
     Hi newuser! You've successfully authenticated, but GitHub does not provide shell access.
     ```
 
-
 ## Install VS Code
 
 1. Download VS Code .deb file from VS Code website: <https://code.visualstudio.com/download>
@@ -89,4 +88,30 @@
     git config --global user.name "John Doe"
     git config --global user.email johndoe@example.com
     git config --global core.editor code
+    ```
+
+## Installing Docker
+
+Info: <https://www.youtube.com/watch?v=Ax66SnZROKA>
+
+ 1. Install docker:
+
+     ```bash
+    apt install docker.io docker-compose -y
+    ```
+
+ 2. Install Portainer
+
+    ```bash
+    docker volume create portainer_data
+    docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
+    ```
+
+    Need to add user to `docker` group so as not need to `sudo` every command:
+
+    ```bash
+    sudo groupadd docker
+    sudo usermod -aG docker $USER
+    newgrp docker
+    docker run hello-world
     ```
