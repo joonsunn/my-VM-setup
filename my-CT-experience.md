@@ -92,6 +92,7 @@
 
 ## Installing Docker
 
+UPDATE: follow instructions here better: <https://docs.docker.com/engine/install/ubuntu/>  
 Info: <https://www.youtube.com/watch?v=Ax66SnZROKA>
 
  1. Install docker:
@@ -153,3 +154,17 @@ Info: <https://www.youtube.com/watch?v=Ax66SnZROKA>
     ```bash
     npm install -g npm@latest
     ```
+
+## Proxying
+
+Could not get Nginx Proxy Manager to work. Might revisit.
+
+Set up Cloudflare tunnel: <https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/get-started/create-local-tunnel/>
+
+Install and run `cloudflared` as service: <https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/configure-tunnels/local-management/as-a-service/linux/>
+
+Default commands does not work. Need to specify config file location for mine to work:
+
+```bash
+sudo cloudflared --config /home/username/.cloudflared/config.yml service install
+```
