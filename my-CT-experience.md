@@ -188,7 +188,7 @@ To update tunneling config without downtime: <https://developers.cloudflare.com/
 
 In the root directory of the app (where the /src folder resides together with `Dockerfile` and `docker-compose.yml`):
 
-1. Build image
+1. Build (and rebuild after a `git pull`) image
 
     ```bash
     docker-compose build
