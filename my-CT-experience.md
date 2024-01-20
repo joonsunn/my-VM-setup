@@ -168,3 +168,43 @@ Default commands does not work. Need to specify config file location for mine to
 ```bash
 sudo cloudflared --config /home/username/.cloudflared/config.yml service install
 ```
+
+Basically, create tunnel, then register DNS records for tunnelling attached to that tunnel. Then run the tunnel.
+
+## Running Docker containers
+
+In the root directory of the app (where the /src folder resides together with `Dockerfile` and `docker-compose.yml`):
+
+1. Build image
+
+    ```bash
+    docker-compose build
+    ```
+
+2. Build container
+
+    ```bash
+    docker-compose up
+    ```
+
+3. Stop container
+
+    ```bash
+    docker-compose stop
+    ```
+
+4. Start container
+
+    ```bash
+    docker-compose start
+    ```
+
+5. Delete container
+
+    ```bash
+    docker-compose down
+    ```
+
+Prefer to use `docker-compose` instead of plain `docker` because of potential to bundle apps together in the same service if needed.
+
+Somehow the browser caches locally websites hosted on docker. Need to use incognito mode to check if website is refreshed properly.
