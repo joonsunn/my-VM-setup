@@ -171,6 +171,19 @@ sudo cloudflared --config /home/username/.cloudflared/config.yml service install
 
 Basically, create tunnel, then register DNS records for tunnelling attached to that tunnel. Then run the tunnel.
 
+Multiple DNS records can be registered to the same tunnel. Just add additional ingress rules in the same `config.yml` file once the additional DNS route `CNAME` has been created.
+
+As a refresher, to create/add new `CNAME` DNS route to a tunnel:
+
+```bash
+cloudflared tunnel route dns <UUID or NAME> <hostname>
+```
+
+`UUID` refers to tunnel id. `hostname` is the new `CNAME` to add. This will be the full path e.g. `app1.DOMAINNAME.tld`.
+
+To update tunneling config without downtime: <https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/deploy-tunnels/deploy-cloudflared-replicas/>
+
+
 ## Running Docker containers
 
 In the root directory of the app (where the /src folder resides together with `Dockerfile` and `docker-compose.yml`):
