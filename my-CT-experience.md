@@ -311,4 +311,6 @@ jobs:
 
 ```
 
+Alternatively, can replace above docker commands with one: `docker-compose up -d --build`. This command will not delete the old container, but instead will build it then run it in detached mode.
+
 Will need to relook into above workflow file naming, because it seems the workflow is mainly deploying Docker containers rather than pure Nodejs service.
