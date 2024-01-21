@@ -269,9 +269,10 @@ CMD ["npx", "serve", "build"]
 ```yaml
 version: '3'
 services:
-  [REPLACE WITH APP/SERVICE NAME]:
+  [REPLACE WITH APP NAME]:
     build: .
     pull_policy: build
+    restart: always
     ports:
       - "3000:3000"
 ```
@@ -309,3 +310,5 @@ jobs:
     - run: docker-compose start
 
 ```
+
+Will need to relook into above workflow file naming, because it seems the workflow is mainly deploying Docker containers rather than pure Nodejs service.
