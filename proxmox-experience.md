@@ -640,6 +640,12 @@ Downside to `moonlight` is that need to login to server device to start the `sun
 
 Windows does not have virGL drivers yet, so no point in installing `sunshine` on it because it will still only use VirtIO drivers, which is software rendering. Though Moonlight automatically detects the server once `sunshine` is properly installed on a Windows VM, without having to input IP address manually.
 
+FIX: Sunshine dies from time to time (once per hour with error `drm fb`). Run:
+
+```bash
+sudo setcap -r $(readlink -f $(which sunshine))
+```
+
 ## Notes on Gnome
 
 Install gnome-shell-extension-manager: <https://github.com/mjakeman/extension-manager>
