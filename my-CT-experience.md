@@ -90,6 +90,19 @@
     git config --global core.editor code
     ```
 
+5. If "Open folder in VS Code" option does not appear in context menu in a folder: <https://forums.linuxmint.com/viewtopic.php?t=286961>
+   Create file `vscode.nemo_action` in `~/.local/share/nemo/actions` with following content:
+
+   ```bash
+    [Nemo Action]
+    Name=Open in VS Code
+    Comment=Open in VS Code
+    Exec=code "%F"
+    Icon-Name=com.visualstudio.code
+    Selection=Any
+    Extensions=dir;
+   ```
+
 ## Installing Docker
 
 UPDATE: follow instructions here better: <https://docs.docker.com/engine/install/ubuntu/>  
