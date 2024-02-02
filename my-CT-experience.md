@@ -87,7 +87,7 @@
     ```bash
     git config --global user.name "John Doe"
     git config --global user.email johndoe@example.com
-    git config --global core.editor code
+    git config --global core.editor "code --wait"
     ```
 
 5. If "Open folder in VS Code" option does not appear in context menu in a folder: <https://forums.linuxmint.com/viewtopic.php?t=286961>
