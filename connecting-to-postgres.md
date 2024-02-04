@@ -1,6 +1,6 @@
 # On Connecting to Postgres
 
-Base setup to create postgres+pgadmin container hosted on Docker:
+Base setup to create postgres+pgadmin container hosted on Docker: <https://gist.github.com/Da9el00/ff1d36bf914dc1c6c71aa9d70ac68136> and <https://www.youtube.com/watch?v=qECVC6t_2mU>
 
 docker-compose.yml:
 
