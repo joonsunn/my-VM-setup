@@ -338,3 +338,56 @@ jobs:
 Alternatively, can replace above docker commands with one: `docker-compose up -d --build`. This command will not delete the old container, but instead will build it then run it in detached mode. <https://stackoverflow.com/questions/42529211/how-to-rebuild-and-update-a-container-without-downtime-with-docker-compose>
 
 Will need to relook into above workflow file naming, because it seems the workflow is mainly deploying Docker containers rather than pure Nodejs service.
+
+## Set up Ollama and Llama Coder
+
+<https://ollama.com/download>
+<https://github.com/ollama-webui/ollama-webui>
+
+Follow instructions for installation of Ollama normally in system, as well as webUI using docker.
+
+If unable to connect (unable to access Ollama from local network), need to add following in Ollama.service:
+
+```bash
+systemctl edit ollama.service
+```
+
+Add:
+
+```bash
+[Service]
+Environment="OLLAMA_HOST=0.0.0.0"
+```
+
+Then:
+
+```bash
+systemctl daemon-reload
+systemctl restart ollama
+```
+
+In LlamaCoder in VS Code,
+
+```bash
+Endpoint: [IP address in HTTP] or [URL in HTTPS if routed through internet/cloudflareTunnel]
+```
+
+Inference: Model -> Recommend to just stick to stable-code. CodeLlama don't do very good job of generating code chunks, only one line at a time.
+
+If want to use models other than the ones listed (e.g. llama2), choose custom, then under Inference:Custom:Model type in the model name as it appears in OllamaWebUI, e.g. `llama2:latest`.
+
+If VS Code says model cannot be loaded and needs to be downloaded (even if already downloaded at webUI or other previous steps), just click `yes`. It will resolve by itself.
+
+## Set up Continue.dev VS Code extension
+
+For self-hosted models (using Ollama as provider), config as follows (example):
+
+```json
+"models": [
+    {
+      "title": "Code Llama",
+      "provider": "ollama",
+      "model": "codellama:7b-code-q4_K_S",
+      "apiBase": "[IP or URL]"
+    },
+```
