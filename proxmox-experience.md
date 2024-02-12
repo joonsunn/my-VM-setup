@@ -242,6 +242,10 @@ xfreerdp -f /u:[username] /p:[password] /v:[IP of destination] /sound:sys:pulse 
 
 Not sure how to get fullscreen toggle to work, because `CRTL+ALT+ENTER` never worked for me. Due to this, I still prefer Remmina. But need to find a way to make the options bar in Remmina dark instead of current white theme.
 
+## Set up Guacamole
+
+<https://github.com/boschkundendienst/guacamole-docker-compose>
+
 ## Misc
 
 To check wifi from terminal: <https://askubuntu.com/questions/1401941/is-there-a-way-to-check-whether-my-device-is-currently-using-the-2-4-ghz-or-5-gh>

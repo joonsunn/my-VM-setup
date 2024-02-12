@@ -198,6 +198,13 @@ cloudflared tunnel route dns <UUID or NAME> <hostname>
 
 To update tunneling config without downtime: <https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/deploy-tunnels/deploy-cloudflared-replicas/>
 
+UPDATE: Easier to just use remotely-managed tunnel instead of CLI: <https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/get-started/create-remote-tunnel/>
+
+Easier to make changes, especially adding routes to tunnel.
+
+NOTE: Cloudflare recommends one tunnel per machine. Adding more identities to the same config file in CLI does not work anyway, hence why just use remotely-managed tunnels. Had problem adding routes to existing tunnel config (link #2 keeps going to link #1).
+
+
 ## Running Docker containers
 
 In the root directory of the app (where the /src folder resides together with `Dockerfile` and `docker-compose.yml`):
