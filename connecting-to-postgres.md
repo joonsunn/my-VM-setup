@@ -56,7 +56,7 @@ const pool = new Pool({
   port: 5432,
 });
 
-// helper function for template string literal function
+// helper function for template string literal function: https://www.reddit.com/r/nextjs/comments/17jglcd/dropin_replacement_code_for_nextjs_magic_sql_tag/?rdt=45248
 async function sql(strings, ...values) {
   const statement = new SQLStatement(strings, values);
   return statement;
@@ -241,3 +241,4 @@ export default function RootLayout({
 ```
 
 Then can call `useQuery` in all components within the project.
+
