@@ -55,7 +55,7 @@ Small scare as after post-install script completed, was unable to connect to it 
 Based on this video: <https://www.youtube.com/watch?v=_u8qTN3cCnQ&t=885s>
 
 At Datacenter -> Storage -> `local-lvm` -> Remove.  
-At PVE node -> Shell ->  
+At PVE node -> Shell ->
 
 ```bash
 lvremove /dev/pve/data
@@ -63,7 +63,7 @@ lvresize -l +100%FREE /dev/pve/root
 resize2fs /dev/mapper/pve-root
 ```
 
-After that, ```local``` still will not allow VM to be installed. `local` need to be explicitly allowed to install disk images to install VMs. To do this:
+After that, `local` still will not allow VM to be installed. `local` need to be explicitly allowed to install disk images to install VMs. To do this:
 
 At Datacenter -> Storage -> `local` -> Edit -> Content -> Click everything.
 
@@ -102,33 +102,33 @@ sudo apt install libgl1 libegl1
 
 3. Install stuffs
 
-   * install Chromium from Software Manager
+   - install Chromium from Software Manager
 
-   * ```bash
+   - ```bash
       sudo apt install qemu-guest-agent
-      ```
+     ```
 
-   * ```bash
+   - ```bash
       sudo apt install openssh-server
-      ```
+     ```
 
 4. Install `sunshine`
 
    Download `sunshine` package from: <https://github.com/LizardByte/Sunshine/releases>
 
-   * ```bash
+   - ```bash
       chmod +x sunshine-{ubuntu-version}.deb
-      ```
+     ```
 
-   * ```bash
+   - ```bash
       sudo apt install -f ./sunshine-{ubuntu-version}.deb
-      ```
+     ```
 
-   * ```bash
+   - ```bash
       sunshine
-      ```
+     ```
 
-   * Enable `UPnP`.
+   - Enable `UPnP`.
 
 5. Connect using `moonlight` from client side.
 
@@ -154,14 +154,31 @@ Install XRDP Easy Install script (just google and navigate the website to get la
 
 ```bash
 wget https://www.c-nergy.be/downloads/xRDP/xrdp-installer-1.4.8.zip
-unzip xrdp-installer-1.4.8.zip 
+unzip xrdp-installer-1.4.8.zip
 chmod +x xrdp-installer-1.4.8.sh
 nano xrdp-installer-1.4.8.sh
 ===== add --enable-glamor flags in configure. See below =====
  ./xrdp-installer-1.4.8.sh -s
 ```
 
-Modify xRDP Easy Install script to include `--enable glamour` at the vonfigure step of `XRDP` and `XORG`, still no changes to virGL over XRDP. Info from : <https://gist.github.com/rkkoszewski/aa531cee7126edf329b76bdd0546f502>  
+If installing xRDP on "non-approved" OS (such as KDE Neon 6), run following command:
+
+`lsb_release -sd`
+
+Then in the xRDP script, navigate to around line 374, and copy the switch case for one of the distros. Paste it as another switch case, then replace the distro with the output of `lsb_release -sd`, e.g.:
+
+```bash
+   *"KDE neon 6.0"*)
+   /bin/echo -e "\e[1;32m       |-| OS Version : $version\e[0m"
+   /bin/echo -e "\e[1;32m       |-| Desktop Version : $DesktopVer\e[0m"
+	;;
+```
+
+Trick will not work if using "non-approved" desktop environment, because I'm not sure what to populate the configurations for. (relevant code for DE checks begins at line 189 )
+
+Installation should proceed after that. Note that as this is a circumvention of xRDP Easy Install Script's safeguards, be prepared to nuke the installation if things go wrong.
+
+Modify xRDP Easy Install script to include `--enable glamour` at the vonfigure step of `XRDP` and `XORG`, still no changes to virGL over XRDP. Info from : <https://gist.github.com/rkkoszewski/aa531cee7126edf329b76bdd0546f502>
 
 `--enable-glamor --enable-rfxcodec --enable-mp3lame --enable-fdkaac --enable-opus --enable-pixman --enable-fuse --enable-jpeg --enable-ipv6`
 
@@ -170,7 +187,7 @@ TODO: Investigate the `-c` flag for custom installation with compilation from so
 
 Machine settings: <https://forum.proxmox.com/threads/solved-vms-linux-and-windows-very-slow-and-laggy.104469/>  
 Changed machine to q35  
-Changed CPU to HOST  
+Changed CPU to HOST
 
 At destination machine:
 
@@ -188,7 +205,7 @@ crypt_level=low
 Remmina settings:
 
 Color settings: GFX 32bpp  
-Network: LAN  
+Network: LAN
 
 ![Alt text](image-1.png)
 
@@ -272,7 +289,7 @@ sudo service ssh status
 Then need to allow port 22 in `ufw`:
 
 ```bash
-sudo ufw allow ssh 
+sudo ufw allow ssh
 ```
 
 For RDP apparently proper installation requires opening port 3389 on UFW:
@@ -310,7 +327,7 @@ To set time date format (esp for Linux Mint): <https://foragoodstrftime.com/>
 Built-in multi-line non-CLI text editors to be used when editting config files from CLI (instead of using `nano`):
 
 Kubuntu: `kate`  
-Linux Mint: `xed`  
+Linux Mint: `xed`
 
 ## virGL on Ubuntu Vm
 
@@ -318,19 +335,19 @@ Linux Mint: `xed`
 
 Below for setup on Kubuntu:
 
-Install VirGL drivers: <https://www.reddit.com/r/Proxmox/comments/v6p0om/amd_5750g_virgl_initial_benchmarks/>  
+Install VirGL drivers: <https://www.reddit.com/r/Proxmox/comments/v6p0om/amd_5750g_virgl_initial_benchmarks/>
 
-Only able to get `glxgears -info` to show virGL when accessing VM through Proxmox shell. When accessing through xRDP, can only get `llvmpipe` no matter what.  
-  
-Other ways to check:  
+Only able to get `glxgears -info` to show virGL when accessing VM through Proxmox shell. When accessing through xRDP, can only get `llvmpipe` no matter what.
+
+Other ways to check:
 
 `glxinfo -B`  
 `dmesg | grep vga`  
-`dmesg | grep virgl`  
+`dmesg | grep virgl`
 
-Went through GPU passthrough, but still showing `llvmpipe`, with suboptimal FPS when playing youtube 1080p60fps.  
+Went through GPU passthrough, but still showing `llvmpipe`, with suboptimal FPS when playing youtube 1080p60fps.
 
-TODO: To investigate further.  
+TODO: To investigate further.
 
 Check Virtualization is available on CPU:
 
@@ -340,9 +357,9 @@ cat /proc/cpuinfo | grep vmx svm
 
 Perhaps `X11Forwarding` is the answer? <https://stackoverflow.com/questions/61590691/the-xauthority-file-is-not-does-not-existhence-via-local-ssh-connection-displa>
 
-On switching display manager: <https://techpiezo.com/linux/switch-display-manager-in-ubuntu-20-04/>  
+On switching display manager: <https://techpiezo.com/linux/switch-display-manager-in-ubuntu-20-04/>
 
-On `lightdm` greeter: <https://www.reddit.com/r/archlinux/comments/nr6sb2/new_to_arch_cant_start_lightdm/>  
+On `lightdm` greeter: <https://www.reddit.com/r/archlinux/comments/nr6sb2/new_to_arch_cant_start_lightdm/>
 
 Forum thread to follow on progress of virGL (virtio-vga-gl): <https://forum.proxmox.com/threads/virglrenderer-for-3d-support.61801/page-4#:~:text=Yes%2C%20VGA%20==%20GPU%2C%20so%20VirtioGPU%20is,CLI/API%20or%20even%20Web%20UI.%20chrcoluk%20said>:.
 
@@ -378,7 +395,7 @@ VirGL drivers for Windows still work in progress: <https://github.com/virtio-win
 
 Below procedure taken from: <https://forum.proxmox.com/threads/pci-gpu-passthrough-on-proxmox-ve-8-installation-and-configuration.130218/>
 
-1) editting `/etc/default/grub`
+1. editting `/etc/default/grub`
 
 ```bash
 GRUB_CMDLINE_LINUX_DEFAULT="quiet  iommu=pt"
@@ -408,9 +425,9 @@ From: <https://www.reddit.com/r/homelab/comments/b5xpua/the_ultimate_beginners_g
 Also: <https://www.reddit.com/r/Proxmox/comments/lcnn5w/proxmox_pcie_passthrough_in_2_minutes/>  
 Further reading: <https://www.reddit.com/r/homelab/comments/11l0s5j/boxmox_asrock_4x4_box_5800u_jbod_proxmox/>  
 Graphical gudie (ignore part about vfio_virqfd): <https://3os.org/infrastructure/proxmox/gpu-passthrough/igpu-passthrough-to-vm/#linux-virtual-machine-igpu-passthrough-configuration>  
-More: <https://github.com/isc30/ryzen-7000-series-proxmox>  
+More: <https://github.com/isc30/ryzen-7000-series-proxmox>
 
-2) editting `/etc/modules`
+2. editting `/etc/modules`
 
 Add the following lines:
 
@@ -435,7 +452,7 @@ dmesg | grep -i vfio
 
 Should see something similar to:`[ 7.262027] VFIO - User Level meta-driver version: 0.3`
 
-3) Verify remapping:
+3. Verify remapping:
 
 ```bash
 dmesg | grep 'remapping'
@@ -449,7 +466,7 @@ Else:
 echo "options vfio_iommu_type1 allow_unsafe_interrupts=1" > /etc/modprobe.d/iommu_unsafe_interrupts.conf
 ```
 
-4) Additional AMD setup (and driver block):
+4. Additional AMD setup (and driver block):
 
 ```bash
 apt install pve-headers-$(uname -r)
@@ -638,7 +655,7 @@ ufw allow 48002/udp
 ufw allow 48010/udp
 ```
 
-Alternatively, turn on `UPnP` in Sunshine Settings under `General`.
+Alternatively, turn on `UPnP` in Sunshine Settings under `Network`.
 
 Downside to `moonlight` is that need to login to server device to start the `sunshine` service, which means no autologin/start on bootup, unless specially set up to do from server side (unlike xRDP where connection can be established without needing to be logged in locally first). Reference info (did not execute): <https://forum.level1techs.com/t/how-to-set-up-headless-sunshine-on-ubuntu-server-22-04-with-an-nvidia-gpu/197106>
 
