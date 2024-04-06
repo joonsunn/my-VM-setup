@@ -729,3 +729,69 @@ sudo usermod -aG [name for shared users group for this new folder] user2
 ## Set static IP
 
 Info: <https://www.freecodecamp.org/news/setting-a-static-ip-in-ubuntu-linux-ip-address-tutorial/>
+
+Modify `/etc/netplan/01-network-manager-all.yaml` as follows:
+
+```yaml
+network:
+ version: 2
+ renderer: NetworkManager
+ ethernets:
+   eth0:
+     dhcp4: no
+     addresses: "STATIC ADDRESS /24 or whatever ifconfig -a says"
+     gateway4: "default gateway IP"
+     nameservers:
+         addresses: [8.8.8.8,8.8.8.4] or 1.1.1.1 for cloudflare
+```
+
+## Bluetooth headset mic input fix
+
+Technically not for VM, but for locally installed Linux (Ubuntu) installation.
+
+Info: <https://www.reddit.com/r/pop_os/comments/ol9nxx/installing_latest_pipewire_with_working_bluetooth/>
+
+Steps replicated here for ease of reference:
+
+Install PPA for latest pipewire
+
+```bash
+sudo add-apt-repository ppa:pipewire-debian/pipewire-upstream (this ppa user builds from arch upstream)
+sudo apt-get update
+```
+
+Install deps and codecs
+
+```bash
+sudo apt install libfdk-aac2 libldacbt-{abr,enc}2 libopenaptx0
+sudo apt install libspa-0.2-{bluetooth,dev,modules}
+```
+
+Disable pulseaudio
+
+```bash
+systemctl --user --now disable pulseaudio.{socket,service}
+systemctl --user mask pulseaudio
+```
+
+Remove pulseaudio-module-bluetooth otherwise your bluetooth devices will not
+
+```bash
+sudo apt remove pulseaudio-module-bluetooth
+```
+
+Enable pipewire
+
+```bash
+systemctl --user --now enable pipewire{,-pulse}.{socket,service} pipewire-media-session.service
+```
+
+Verify pipewire is working (you should see pipewire mentioned)
+
+```bash
+pactl info | grep '^Server Name'
+```
+
+Reboot
+
+If still not working, remove bluetooth device and re-add.
