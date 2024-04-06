@@ -725,3 +725,7 @@ sudo chmod -R 2775 /whateverSharedDirectory
 sudo usermod -aG [name for shared users group for this new folder] user1
 sudo usermod -aG [name for shared users group for this new folder] user2
 ```
+
+## Set static IP
+
+Info: <https://www.freecodecamp.org/news/setting-a-static-ip-in-ubuntu-linux-ip-address-tutorial/>
