@@ -688,3 +688,40 @@ On `sunshine` session, cursor does not appear. To fix, set accessbility zoom lev
 Mouse acceleration setting is under Keyboard and Mouse Tweaks. Mouse speed is under mouse settings.
 
 Maximise and Minimise button at window decoration is also under Tweaks.
+
+## On Adding Multiple Users
+
+```bash
+sudo adduser newuser
+sudo nano /etc/sudoers
+
+
+```
+
+Scroll down until the line that says:
+
+```bash
+# User privilege specification
+root    ALL=(ALL:ALL) ALL
+```
+
+Add `newuser` to below `root`:
+
+```bash
+newuser    ALL=(ALL:ALL) ALL
+```
+
+Save and exit file.
+
+### Setup shared folder between multiple users
+
+Info from: <https://www.tutorialspoint.com/how-to-create-a-shared-directory-for-all-users-in-linux>
+
+```bash
+sudo mkdir -p /whateverSharedDirectory
+sudo groupadd [name for shared users group for this new folder]
+sudo chgrp -R [name for shared users group for this new folder] /whateverSharedDirectory
+sudo chmod -R 2775 /whateverSharedDirectory
+sudo usermod -aG [name for shared users group for this new folder] user1
+sudo usermod -aG [name for shared users group for this new folder] user2
+```
