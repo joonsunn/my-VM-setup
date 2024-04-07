@@ -795,3 +795,11 @@ pactl info | grep '^Server Name'
 Reboot
 
 If still not working, remove bluetooth device and re-add.
+
+Might have to check audio settings and switch profile to HSP/HFP:
+
+![alt text](image-7.png)
+
+![alt text](image-8.png)
+
+After that, bluetooth headset mic should appear with auto selected HSP/HFP profile.
