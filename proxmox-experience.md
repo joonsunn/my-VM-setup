@@ -726,6 +726,10 @@ sudo usermod -aG [name for shared users group for this new folder] user1
 sudo usermod -aG [name for shared users group for this new folder] user2
 ```
 
+### To grant read write permissions to folder
+
+Info: <https://askubuntu.com/questions/719996/how-can-i-give-full-permission-to-folder-and-subfolder>
+
 ## Set static IP
 
 Info: <https://www.freecodecamp.org/news/setting-a-static-ip-in-ubuntu-linux-ip-address-tutorial/>
