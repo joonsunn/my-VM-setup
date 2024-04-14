@@ -9,41 +9,41 @@
 
 1. Initial setup only creates root user. Best to create a non-root user straightaway after login:
 
-    ```bash
-    adduser newuser
-    ```
+   ```bash
+   adduser newuser
+   ```
 
-    Replace `newuser` with whatever username you choose.
+   Replace `newuser` with whatever username you choose.
 
 2. Add `newuser` to sudoers file: <https://www.digitalocean.com/community/tutorials/how-to-add-and-delete-users-on-ubuntu-20-04>
 
-    ```bash
-    nano /etc/sudoers
-    ```
+   ```bash
+   nano /etc/sudoers
+   ```
 
-    Scroll down until the line that says:
+   Scroll down until the line that says:
 
-    ```bash
-    # User privilege specification
-    root    ALL=(ALL:ALL) ALL
-    ```
+   ```bash
+   # User privilege specification
+   root    ALL=(ALL:ALL) ALL
+   ```
 
-    Add `newuser` to below `root`:
+   Add `newuser` to below `root`:
 
-    ```bash
-    newuser    ALL=(ALL:ALL) ALL
-    ```
+   ```bash
+   newuser    ALL=(ALL:ALL) ALL
+   ```
 
-    Save and exit file.
+   Save and exit file.
 
 3. Install `openssh-server` and start the service:
 
-    ```bash
-    sudo apt install openssh-server
-    sudo systemctl start ssh 
-    ```
+   ```bash
+   sudo apt install openssh-server
+   sudo systemctl start ssh
+   ```
 
-    Then ssh into the container to make life easier.
+   Then ssh into the container to make life easier.
 
 4. Do the usual update and upgrade.
 
@@ -51,44 +51,44 @@
 
 1. Generate ssh keys to be added to Github: <https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent?platform=linux>
 
-    ```bash
-    ssh-keygen -t ed25519 -C "your_email@example.com"
-    exec ssh-agent bash
-    ssh-add ~/.ssh/id_ed25519
-    cat ~/.ssh/id_ed25519.pub
-    ```
+   ```bash
+   ssh-keygen -t ed25519 -C "your_email@example.com"
+   exec ssh-agent bash
+   ssh-add ~/.ssh/id_ed25519
+   cat ~/.ssh/id_ed25519.pub
+   ```
 
-    Copy output and paste into Github ssh keys page.
+   Copy output and paste into Github ssh keys page.
 
-    Test connection: <https://docs.github.com/en/authentication/connecting-to-github-with-ssh/testing-your-ssh-connection>
+   Test connection: <https://docs.github.com/en/authentication/connecting-to-github-with-ssh/testing-your-ssh-connection>
 
-    ```bash
-    ssh -T git@github.com
-    ```
+   ```bash
+   ssh -T git@github.com
+   ```
 
-    Should see something like the following:
+   Should see something like the following:
 
-    ```bash
-    Hi newuser! You've successfully authenticated, but GitHub does not provide shell access.
-    ```
+   ```bash
+   Hi newuser! You've successfully authenticated, but GitHub does not provide shell access.
+   ```
 
 ## Install VS Code
 
 1. Download VS Code .deb file from VS Code website: <https://code.visualstudio.com/download>
 2. Install via terminal: <https://code.visualstudio.com/docs/setup/linux>
 
-    ```bash
-    sudo apt install ./{code.deb}
-    ```
+   ```bash
+   sudo apt install ./{code.deb}
+   ```
 
 3. Install `git`.
 4. setup global configs: <https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup>
 
-    ```bash
-    git config --global user.name "John Doe"
-    git config --global user.email johndoe@example.com
-    git config --global core.editor "code --wait"
-    ```
+   ```bash
+   git config --global user.name "John Doe"
+   git config --global user.email johndoe@example.com
+   git config --global core.editor "code --wait"
+   ```
 
 5. If "Open folder in VS Code" option does not appear in context menu in a folder: <https://forums.linuxmint.com/viewtopic.php?t=286961>
    Create file `vscode.nemo_action` in `~/.local/share/nemo/actions` with following content:
@@ -108,65 +108,65 @@
 UPDATE: follow instructions here better: <https://docs.docker.com/engine/install/ubuntu/>  
 Info: <https://www.youtube.com/watch?v=Ax66SnZROKA>
 
- 1. Install docker:
+1. Install docker:
 
-     ```bash
-    apt install docker.io docker-compose -y
-    ```
+   ```bash
+   apt install docker.io docker-compose -y
+   ```
 
- 2. Install Portainer
+2. Install Portainer
 
-    ```bash
-    docker volume create portainer_data
-    docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
-    ```
+   ```bash
+   docker volume create portainer_data
+   docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
+   ```
 
- 3. Need to add user to `docker` group so as not need to `sudo` every command:
+3. Need to add user to `docker` group so as not need to `sudo` every command:
 
-    ```bash
-    sudo groupadd docker
-    sudo usermod -aG docker $USER
-    newgrp docker
-    docker run hello-world
-    ```
+   ```bash
+   sudo groupadd docker
+   sudo usermod -aG docker $USER
+   newgrp docker
+   docker run hello-world
+   ```
 
 ## Install NodeJS
 
 1. Install `nvm`: <https://github.com/nvm-sh/nvm>
 
-    ```bash
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-    ```
+   ```bash
+   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+   ```
 
 2. Make `bash` pickup `nvm`:
 
-    ```bash
-    source ~/.bashrc
-    ```
+   ```bash
+   source ~/.bashrc
+   ```
 
 3. Show list of NPM versions available:
 
-    ```bash
-    nvm list-remote
-    ```
+   ```bash
+   nvm list-remote
+   ```
 
 4. Install desired nodejs version:
 
-    ```bash
-    nvm install v20.11.0
-    ```
+   ```bash
+   nvm install v20.11.0
+   ```
 
-    Alternatively, can install latest:
+   Alternatively, can install latest:
 
-    ```bash
-    nvm install node
-    ```
+   ```bash
+   nvm install node
+   ```
 
 5. Install `npm`:
 
-    ```bash
-    npm install -g npm@latest
-    ```
+   ```bash
+   npm install -g npm@latest
+   ```
 
 ## Proxying
 
@@ -211,33 +211,33 @@ In the root directory of the app (where the /src folder resides together with `D
 
 1. Build (and rebuild after a `git pull`) image
 
-    ```bash
-    docker-compose build
-    ```
+   ```bash
+   docker-compose build
+   ```
 
 2. Build container
 
-    ```bash
-    docker-compose up
-    ```
+   ```bash
+   docker-compose up
+   ```
 
 3. Stop container
 
-    ```bash
-    docker-compose stop
-    ```
+   ```bash
+   docker-compose stop
+   ```
 
 4. Start container
 
-    ```bash
-    docker-compose start
-    ```
+   ```bash
+   docker-compose start
+   ```
 
 5. Delete container
 
-    ```bash
-    docker-compose down
-    ```
+   ```bash
+   docker-compose down
+   ```
 
 6. To run a `shell` session from within a container:
 
@@ -245,7 +245,7 @@ In the root directory of the app (where the /src folder resides together with `D
    docker exec -it container_name sh
    ```
 
-    or
+   or
 
    ```bash
    docker compose exec -it container_name sh
@@ -257,11 +257,11 @@ Somehow the browser caches locally websites hosted on docker. Need to use incogn
 
 ## CI/CD workflow using Github Actions and self-hosted runner
 
-1) At repo side: `"Actions"` -> `"Nodejs"`.
+1. At repo side: `"Actions"` -> `"Nodejs"`.
    At autogenerated workflow yaml file, modify the `runs-on` variable to be `self-hosted`
    Commit and push to main.
    Still at repo side: `"Settings"` -> `"Add Runner"` -> Follow instructions to install runner at server side.
-2) At server side hosting the app: continuing from last step of first part above, when following the instructions to create a `"actions-runner"` folder, the folder can be named anything. For me I name it within an `"automated-repos"` folder, and name the actions runner folder using the project name.
+2. At server side hosting the app: continuing from last step of first part above, when following the instructions to create a `"actions-runner"` folder, the folder can be named anything. For me I name it within an `"automated-repos"` folder, and name the actions runner folder using the project name.
    Then:
 
    ```bash
@@ -272,7 +272,7 @@ Somehow the browser caches locally websites hosted on docker. Need to use incogn
 
    ```bash
    sudo ./svc.sh install
-   sudo ./svc.sh start 
+   sudo ./svc.sh start
    ```
 
 Dockerfile for simple `create-react-app` app to run production build:
@@ -298,7 +298,7 @@ CMD ["npx", "serve", "build"]
 `docker-compose.yaml`:
 
 ```yaml
-version: '3'
+version: "3"
 services:
   [REPLACE WITH APP NAME]:
     build: .
@@ -315,13 +315,12 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build:
-
     runs-on: self-hosted
 
     strategy:
@@ -329,22 +328,39 @@ jobs:
         node-version: [20.x]
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: docker-compose down
-    - run: docker-compose build
-    - run: docker-compose up --no-start
-    - run: docker-compose start
-
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+      - run: docker-compose down
+      - run: docker-compose build
+      - run: docker-compose up --no-start
+      - run: docker-compose start
 ```
 
 Alternatively, can replace above docker commands with one: `docker-compose up -d --build`. This command will not delete the old container, but instead will build it then run it in detached mode. <https://stackoverflow.com/questions/42529211/how-to-rebuild-and-update-a-container-without-downtime-with-docker-compose>
 
 Will need to relook into above workflow file naming, because it seems the workflow is mainly deploying Docker containers rather than pure Nodejs service.
+
+## Set up self-hosted PaaS - Coolify
+
+_Note: below steps for projects that are configured to run as Docker container_
+
+<https://www.coolify.io/>
+
+1. Install as per instructions.
+2. Add project folliwing on-screen instructions.
+3. For private Github repo, use Deploy Key. Select the key that is created in the following sub-steps:
+   1. Create key pair in `Keys & Tokens` first. Name it appropriately.
+   2. In Github, add this key-pair generated in Coolify to the `Deploy Keys` section in the repo settings. Select `push events`.
+4. For `Build Pack`, select `Docker Compose`. Mayeb have to re-select `Docker Compose` again in the next step.
+5. Once reach `Configuration` page, under `General`, check that Compose file can be detected by clicking `Reload Compose File`. May have to rename the pre-set `Docker Compose Location` a bit (default expects .y**a**ml extension. Rename location to point to .yml if necessary).
+6. Under `Webhooks`, supply a string to `Github Webhook Secret`, click `Save`, then copy the URI on the left side (e.g. `http://[IP ADDR]:8000/webhooks/source/github/events/manual`) and paste in `Webhooks` section at the Github repo settings. The `Secret` should be the same as the one input into the Coolify configuration page. The `Payload URL` needs to be a URL that is accessible from the internet. This means the earlier Coolify Webhook URI needs to be modified to be a URL that is accessible from the internet, either via a tunneled URL (e.g. Cloudflare Tunnel) or need to ensure ports are properly forwarded in order to be able to listen to external connections.
+   - Easiest to just set up Cloudflare Tunnel and configure a CNAME to point to the Coolify instance. A domain name to be managed from Cloudflare Dashboard is required.
+   - To remember that the URI supplied to Github Wehbooks needs to match exactly the CLoudflare Tunneled URI, i.e. _https_ instead of _http_
+7. Select `Just the push event`, then click `Add webhook`. Back at the `Configuration` page, click `Reload Compose File`.
 
 ## Set up Ollama and Llama Coder
 
