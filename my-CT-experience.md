@@ -204,7 +204,6 @@ Easier to make changes, especially adding routes to tunnel.
 
 NOTE: Cloudflare recommends one tunnel per machine. Adding more identities to the same config file in CLI does not work anyway, hence why just use remotely-managed tunnels. Had problem adding routes to existing tunnel config (link #2 keeps going to link #1).
 
-
 ## Running Docker containers
 
 In the root directory of the app (where the /src folder resides together with `Dockerfile` and `docker-compose.yml`):
@@ -414,3 +413,11 @@ For self-hosted models (using Ollama as provider), config as follows (example):
       "apiBase": "[IP or URL]"
     },
 ```
+
+## Set up testing in Next.js project
+
+<https://nextjs.org/docs/app/building-your-application/testing/jest>
+
+<https://acubeddu87.medium.com/nextjs-14-app-router-and-unit-testing-f0ba74b5436b>
+
+<https://stackoverflow.com/questions/62672119/test-suite-failed-to-run-cannot-find-module-or-its-corresponding-type-declaratio>
