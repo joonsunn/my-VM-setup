@@ -1,7 +1,6 @@
 #!/usr/bin/bash
 
-sudo apt install qemu-guest-agent -y
-sudo apt install openssh-server -y
+sudo apt install qemu-guest-agent openssh-server chromium-browser -y
 sudo apt update -y
 sudo apt upgrade -y
 
