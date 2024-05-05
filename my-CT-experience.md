@@ -254,6 +254,22 @@ Prefer to use `docker-compose` instead of plain `docker` because of potential to
 
 Somehow the browser caches locally websites hosted on docker. Need to use incognito mode to check if website is refreshed properly.
 
+## Random running out of space
+
+If use Docker too much, might have issues with disk space on `/Home` folder.
+
+Do a clean up (<https://askubuntu.com/questions/57994/root-drive-is-running-out-of-disk-space-how-can-i-free-up-space>):
+
+```bash
+docker system prune
+```
+
+Or
+
+```bash
+docker system prune -af --volumes
+```
+
 ## CI/CD workflow using Github Actions and self-hosted runner
 
 1. At repo side: `"Actions"` -> `"Nodejs"`.
