@@ -34,6 +34,13 @@ nordvpn whitelist add port 3389
 nordvpn whitelist add port 22
 ```
 
+and/or
+
+```bash
+nordvpn allowlist remove all <---- might not be required
+nordvpn set lan-discovery enabled
+```
+
 After set up as above, finally can connect to Proxmox web UI. However unable to ping google.com from shell. Checked network settings to be as follows (autostart and VLAN aware):
 
 ![Alt text](image.png)
