@@ -30,6 +30,8 @@ EDIT: adding subnet to whitelist worked: <https://askubuntu.com/questions/127682
 
 ```bash
 nordvpn whitelist add subnet 192.168.[subnet].0/24
+nordvpn whitelist add port 3389
+nordvpn whitelist add port 22
 ```
 
 After set up as above, finally can connect to Proxmox web UI. However unable to ping google.com from shell. Checked network settings to be as follows (autostart and VLAN aware):
@@ -258,6 +260,8 @@ xfreerdp -f /u:[username] /p:[password] /v:[IP of destination] /sound:sys:pulse 
 ```
 
 Not sure how to get fullscreen toggle to work, because `CRTL+ALT+ENTER` never worked for me. Due to this, I still prefer Remmina. But need to find a way to make the options bar in Remmina dark instead of current white theme.
+
+NOTE: xRDP does not work with if NordVPN is already activated at destination. Need to login to remote machine first, then only connect NordVPN.
 
 ## Set up Guacamole
 
