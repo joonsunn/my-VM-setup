@@ -818,3 +818,7 @@ Might have to check audio settings and switch profile to HSP/HFP:
 ![alt text](image-8.png)
 
 After that, bluetooth headset mic should appear with auto selected HSP/HFP profile.
+
+## Set custom resolution (e.g. 1440p)
+
+https://askubuntu.com/questions/377937/how-do-i-set-a-custom-resolution
