@@ -5,7 +5,7 @@ sudo apt upgrade -y
 sudo apt install qemu-guest-agent openssh-server chromium-browser -y
 
 # Set up xRDP
-wget https://www.c-nergy.be/downloads/xRDP/xrdp-installer-1.5.zip
+wget https://www.c-nergy.be/downloads/xRDP/xrdp-installer-1.5.1.zip
 unzip xrdp-installer-1.5.zip 
 chmod +x xrdp-installer-1.5.sh
 ./xrdp-installer-1.5.sh -s
