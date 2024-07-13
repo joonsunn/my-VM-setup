@@ -4,9 +4,8 @@
 
 ```bash
 npm init -y
-npm i -D typescript ts-node nodemon
 npm i express
-npm i -D @types/node @types/express
+npm i -D typescript ts-node nodemon @types/node @types/express
 npx tsc --init
 ```
 
