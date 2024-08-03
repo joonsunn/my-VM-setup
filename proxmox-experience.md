@@ -829,3 +829,30 @@ Create a file `~/.xprofile`:
 xrandr --newmode "2560x1440_60.00"  312.25  2560 2752 3024 3488  1440 1443 1448>
 xrandr --addmode Virtual-1 2560x1440_60.00
 ```
+
+If on Wayland: https://davejansen.com/add-custom-resolution-and-refresh-rate-when-using-wayland-gnome/
+
+Check display name:
+
+```bash
+ls /sys/class/drm/card*
+```
+
+Or
+
+```bash
+xrandr --listactivemonitors
+```
+
+Then:
+
+```bash
+sudo nano /etc/default/grub
+```
+
+```diff
+- GRUB_CMDLINE_LINUX_DEFAULT="quiet video"
++ GRUB_CMDLINE_LINUX_DEFAULT="quiet video=Virtual-1:2560x1440@60"
+```
+
+Example above uses 'Virtual-1' as display name.
