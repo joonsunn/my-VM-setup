@@ -150,3 +150,9 @@ Right click Panel -> `Configure Icons and Text Task Manager` -> `Behavior` -> `G
 `System Settings`:  
 `Colors and Themes` -> `Breeze dark`  
 `Window Decoration` -> `Get New` -> `Utterly Round Dark`
+
+Date format (Sun, 04 Aug 2024):
+
+```text
+ddd, dd MMM yyyy
+```
