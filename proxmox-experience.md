@@ -849,7 +849,7 @@ After that, bluetooth headset mic should appear with auto selected HSP/HFP profi
 Create a file `~/.xprofile`:
 
 ```bash
-xrandr --newmode "2560x1440_60.00"  312.25  2560 2752 3024 3488  1440 1443 1448>
+xrandr --newmode "2560x1440_60.00"  312.25  2560 2752 3024 3488  1440 1443 1448 1493 -hsync +vsync
 xrandr --addmode Virtual-1 2560x1440_60.00
 ```
 
