@@ -884,3 +884,17 @@ Then run:
 ```bash
 update-grub
 ```
+
+### Sunshine autostart
+
+For KDE Neon 6.0, need to make own login script:
+
+`autostart-sunshine.sh`:
+
+```bash
+#!/bin/bash
+sunshine
+xdg-screensaver lock
+```
+
+Then set `Login screen` -> Automatically Log in as user: [user] with session [Plasma (Wayland)].
