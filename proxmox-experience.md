@@ -678,6 +678,14 @@ FIX: Sunshine dies from time to time (once per hour with error `drm fb`). Run: <
 sudo setcap -r $(readlink -f $(which sunshine))
 ```
 
+For mouse cursor not appearing in Wayland:
+
+Create `/etc/environment.d/50-kwin-sw-cursor.conf` with following content (to disable hardware cursor): <https://github.com/LizardByte/Sunshine/issues/93>
+
+```props
+KWIN_FORCE_SW_CURSOR=1
+```
+
 ## Notes on Gnome
 
 Install gnome-shell-extension-manager: <https://github.com/mjakeman/extension-manager>
@@ -705,8 +713,6 @@ Maximise and Minimise button at window decoration is also under Tweaks.
 ```bash
 sudo adduser newuser
 sudo nano /etc/sudoers
-
-
 ```
 
 Scroll down until the line that says:
@@ -821,7 +827,7 @@ After that, bluetooth headset mic should appear with auto selected HSP/HFP profi
 
 ## Set custom resolution (e.g. 1440p)
 
-https://askubuntu.com/questions/377937/how-do-i-set-a-custom-resolution
+<https://askubuntu.com/questions/377937/how-do-i-set-a-custom-resolution>
 
 Create a file `~/.xprofile`:
 
@@ -830,7 +836,7 @@ xrandr --newmode "2560x1440_60.00"  312.25  2560 2752 3024 3488  1440 1443 1448>
 xrandr --addmode Virtual-1 2560x1440_60.00
 ```
 
-If on Wayland: https://davejansen.com/add-custom-resolution-and-refresh-rate-when-using-wayland-gnome/
+If on Wayland: <https://davejansen.com/add-custom-resolution-and-refresh-rate-when-using-wayland-gnome/>
 
 Check display name:
 
