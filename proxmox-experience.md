@@ -879,3 +879,8 @@ sudo nano /etc/default/grub
 ```
 
 Example above uses 'Virtual-1' as display name.
+
+Then run:
+```bash
+update-grub
+```
