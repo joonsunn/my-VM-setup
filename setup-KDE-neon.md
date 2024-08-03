@@ -140,3 +140,13 @@ git config --global user.name "John Doe"
 git config --global user.email johndoe@example.com
 git config --global core.editor "code --wait"
 ```
+
+## Setup Plasma
+
+Right click Panel -> `Show Panel Configuration` -> `Floating` -> Toggle off  
+Right click Panel -> `Show Alternatives...` -> `Icons and Text Task Manager`  
+Right click Panel -> `Configure Icons and Text Task Manager` -> `Behavior` -> `Group` -> `Do Not Group`
+
+`System Settings`:
+`Colors and Themes` -> `Breeze dark`
+`Window Decoration` -> `Get New` -> `Utterly Round Dark`
