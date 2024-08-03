@@ -183,6 +183,17 @@ Then in the xRDP script, navigate to around line 374, and copy the switch case f
 	;;
 ```
 
+For KDE neon 6.0, additionally need to add at line ~210: 
+
+```bash
+"plasmax11")
+    DesktopVer="KDE"
+    SessionVer=""
+    /bin/echo -e "\e[1;32m       |-| Session         : $SessionVer\e[0m"
+    /bin/echo -e "\e[1;32m       |-| Desktop Version : $DesktopVer\e[0m"
+    ;;
+```
+
 Trick will not work if using "non-approved" desktop environment, because I'm not sure what to populate the configurations for. (relevant code for DE checks begins at line 189 )
 
 Installation should proceed after that. Note that as this is a circumvention of xRDP Easy Install Script's safeguards, be prepared to nuke the installation if things go wrong.

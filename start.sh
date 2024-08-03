@@ -6,13 +6,13 @@ sudo apt install qemu-guest-agent openssh-server chromium-browser -y
 
 # Set up xRDP
 wget https://www.c-nergy.be/downloads/xRDP/xrdp-installer-1.5.1.zip
-unzip xrdp-installer-1.5.zip 
-chmod +x xrdp-installer-1.5.sh
-./xrdp-installer-1.5.sh -s
+unzip xrdp-installer-1.5.1.zip 
+chmod +x xrdp-installer-1.5.1.sh
+./xrdp-installer-1.5.1.sh -s
 
 # Add Docker's official GPG key:
 sudo apt-get update
-sudo apt-get install ca-certificates curl -y
+sudo apt-get install ca-certificates curl
 sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
 sudo chmod a+r /etc/apt/keyrings/docker.asc
