@@ -822,3 +822,10 @@ After that, bluetooth headset mic should appear with auto selected HSP/HFP profi
 ## Set custom resolution (e.g. 1440p)
 
 https://askubuntu.com/questions/377937/how-do-i-set-a-custom-resolution
+
+Create a file `~/.xprofile`:
+
+```bash
+xrandr --newmode "2560x1440_60.00"  312.25  2560 2752 3024 3488  1440 1443 1448>
+xrandr --addmode Virtual-1 2560x1440_60.00
+```
