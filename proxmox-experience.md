@@ -898,3 +898,6 @@ xdg-screensaver lock
 ```
 
 Then set `Login screen` -> Automatically Log in as user: [user] with session [Plasma (Wayland)].
+Then under `System Settings` -> `Autostart` -> `+ Add...` -> `Add login script`, click `add` then select `autostart-sunshine.sh` as created above.
+
+If doesn't work, then modify the autostart script to only `xdg-screensaver lock`, then add `sunshine` to `add autostart application`.
