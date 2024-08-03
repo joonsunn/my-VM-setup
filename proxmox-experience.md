@@ -183,7 +183,13 @@ Then in the xRDP script, navigate to around line 374, and copy the switch case f
 	;;
 ```
 
-For KDE neon 6.0, additionally need to add at line ~210: 
+For KDE neon 6.0, run:
+
+```bash
+ls /usr/share/xsessions | cut -d "." -f 1
+```
+
+Then take the output and create another copy  at line ~210: 
 
 ```bash
 "plasmax11")
