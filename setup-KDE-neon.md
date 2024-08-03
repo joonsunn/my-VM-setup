@@ -147,6 +147,6 @@ Right click Panel -> `Show Panel Configuration` -> `Floating` -> Toggle off
 Right click Panel -> `Show Alternatives...` -> `Icons and Text Task Manager`  
 Right click Panel -> `Configure Icons and Text Task Manager` -> `Behavior` -> `Group` -> `Do Not Group`
 
-`System Settings`:
-`Colors and Themes` -> `Breeze dark`
+`System Settings`:  
+`Colors and Themes` -> `Breeze dark`  
 `Window Decoration` -> `Get New` -> `Utterly Round Dark`
