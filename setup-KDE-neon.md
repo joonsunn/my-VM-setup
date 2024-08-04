@@ -157,6 +157,92 @@ Date format (Sun, 04 Aug 2024):
 ddd, dd MMM yyyy
 ```
 
+## Setup Sunshine
+
+Host/server side, installed the latest package at LizardByte github: <https://github.com/LizardByte/Sunshine/releases>
+
+After downloading the `sunshine-ubuntu-22.04-{arch}.deb` file, install:
+
+```bash
+sudo apt install -f ./sunshine-{ubuntu-version}.deb
+```
+
+```bash
+sunshine
+```
+
+Point browser to `https://localhost:47990` on host/server, then set up `username` and `password`.
+
+Turn on `UPnP` in Sunshine Settings under `Network`.
+
+For mouse cursor not appearing in Wayland:
+
+Create `/etc/environment.d/50-kwin-sw-cursor.conf` with following content (to disable hardware cursor): <https://github.com/LizardByte/Sunshine/issues/93>
+
+```props
+KWIN_FORCE_SW_CURSOR=1
+```
+
+### Sunshine autostart
+
+`autostart-sunshine.sh`:
+
+```bash
+#!/bin/bash
+sleep 1
+xdg-screensaver lock
+```
+
+Then under `System Settings` -> `Autostart` -> `+ Add...` -> `Add login script`, click `add` then select `autostart-sunshine.sh`.
+
+Then set `Login screen` -> Automatically Log in as user: [user] with session [Plasma (Wayland)].
+
+Add `sunshine` to `add autostart application`.
+
+## Set custom resolution (e.g. 1440p)
+
+<https://askubuntu.com/questions/377937/how-do-i-set-a-custom-resolution>
+
+Create a file `~/.xprofile`:
+
+```bash
+xrandr --newmode "2560x1440_60.00"  312.25  2560 2752 3024 3488  1440 1443 1448 1493 -hsync +vsync
+xrandr --addmode Virtual-1 2560x1440_60.00
+```
+
+If on Wayland: <https://davejansen.com/add-custom-resolution-and-refresh-rate-when-using-wayland-gnome/>
+
+Check display name:
+
+```bash
+ls /sys/class/drm/card*
+```
+
+Or
+
+```bash
+xrandr --listactivemonitors
+```
+
+Then:
+
+```bash
+sudo nano /etc/default/grub
+```
+
+```diff
+- GRUB_CMDLINE_LINUX_DEFAULT="quiet video"
++ GRUB_CMDLINE_LINUX_DEFAULT="quiet video=Virtual-1:2560x1440@60"
+```
+
+Example above uses 'Virtual-1' as display name.
+
+Then run:
+
+```bash
+update-grub
+```
+
 ## Chrome Extensions
 
 - Ublock Origin <https://chromewebstore.google.com/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm?hl=en>
