@@ -170,45 +170,9 @@ nano xrdp-installer-1.5.2.sh
  ./xrdp-installer-1.5.2.sh -s -u
 ```
 
-If installing xRDP on "non-approved" OS (such as KDE Neon 6), run following command:
-
-`lsb_release -sd`
-
-Then in the xRDP script, navigate to around line 374, and copy the switch case for one of the distros. Paste it as another switch case, then replace the distro with the output of `lsb_release -sd`, e.g.:
-
-```bash
-   *"KDE neon 6.0"*)
-   /bin/echo -e "\e[1;32m       |-| OS Version : $version\e[0m"
-   /bin/echo -e "\e[1;32m       |-| Desktop Version : $DesktopVer\e[0m"
-	;;
-```
-
-For KDE neon 6.0, run:
-
-```bash
-ls /usr/share/xsessions | cut -d "." -f 1
-```
-
-Then take the output and create another copy  at line ~210: 
-
-```bash
-"plasmax11")
-    DesktopVer="KDE"
-    SessionVer=""
-    /bin/echo -e "\e[1;32m       |-| Session         : $SessionVer\e[0m"
-    /bin/echo -e "\e[1;32m       |-| Desktop Version : $DesktopVer\e[0m"
-    ;;
-```
-
-Trick will not work if using "non-approved" desktop environment, because I'm not sure what to populate the configurations for. (relevant code for DE checks begins at line 189 )
-
-Installation should proceed after that. Note that as this is a circumvention of xRDP Easy Install Script's safeguards, be prepared to nuke the installation if things go wrong.
-
-Modify xRDP Easy Install script to include `--enable glamour` at the vonfigure step of `XRDP` and `XORG`, still no changes to virGL over XRDP. Info from : <https://gist.github.com/rkkoszewski/aa531cee7126edf329b76bdd0546f502>
-
-`--enable-glamor --enable-rfxcodec --enable-mp3lame --enable-fdkaac --enable-opus --enable-pixman --enable-fuse --enable-jpeg --enable-ipv6`
-
 Remember the `-s` flag!!!
+Add `-u` flag is installing on 'unsupported' distros/desktop environmennts, e.g. KDE Neon.
+
 TODO: Investigate the `-c` flag for custom installation with compilation from source. Necessary?
 
 Machine settings: <https://forum.proxmox.com/threads/solved-vms-linux-and-windows-very-slow-and-laggy.104469/>  
