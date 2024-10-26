@@ -162,12 +162,12 @@ At this point, sound does not work on the VM through web ui shell connection ses
 Install XRDP Easy Install script (just google and navigate the website to get latest script URI): <https://c-nergy.be/blog/?cat=79>
 
 ```bash
-wget https://www.c-nergy.be/downloads/xRDP/xrdp-installer-1.5.1.zip
-unzip xrdp-installer-1.5.1.zip
-chmod +x xrdp-installer-1.5.1.sh
-nano xrdp-installer-1.5.1.sh
+wget https://www.c-nergy.be/downloads/xRDP/xrdp-installer-1.5.2.zip
+unzip xrdp-installer-1.5.2.zip
+chmod +x xrdp-installer-1.5.2.sh
+nano xrdp-installer-1.5.2.sh
 ===== add --enable-glamor flags in configure. See below =====
- ./xrdp-installer-1.5.1.sh -s
+ ./xrdp-installer-1.5.2.sh -s -u
 ```
 
 If installing xRDP on "non-approved" OS (such as KDE Neon 6), run following command:
