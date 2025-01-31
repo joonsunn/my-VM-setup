@@ -97,7 +97,7 @@ sudo systemctl enable tailscaled
 Then at client side:
 
 ```bash
-sudo tailscale up --exit-node=[tailscale IP of exit node] --exit-node-allow-lan-access=true --accept-routes
+sudo tailscale up --exit-node=[tailscale IP of exit node] --exit-node-allow-lan-access=true
 ```
 
 ## Additional setup for Tailscale
