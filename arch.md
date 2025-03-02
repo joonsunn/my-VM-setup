@@ -6,6 +6,7 @@ Under `Network Configuration`, select "copy network configuration".
 Under `Audio`, select `pipewire`
 
 ## `qemu-guest-agent`
+
 ```bash
 pacman -S qemu-guest-agent
 ```
@@ -57,7 +58,6 @@ Choose `1 5 14` after `yay xorg` to select the following:
 yay xorg
 yay xorgxrdp
 yay pipewire-module-xrdp
-1 5 14
 ```
 
 Create two files:
@@ -81,4 +81,25 @@ Then enable xrdp in systemctl
 sudo systemctl enable xrdp
 sudo systemctl start xrdp
 sudo ufw allow 3389
+```
+
+## Tailscale (required for Sunshine to work)
+
+```bash
+curl -fsSL https://tailscale.com/install.sh | sh
+```
+
+## Sunshine
+
+```bash
+yay sunshine
+sudo setcap cap_sys_admin+p $(readlink -f $(which sunshine))
+systemctl --user start sunshine
+systemctl --user enable sunshine
+```
+
+Add the following to `/etc/environment`
+
+```bash
+KWIN_FORCE_SW_CURSOR=1
 ```
