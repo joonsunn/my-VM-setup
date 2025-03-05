@@ -103,3 +103,31 @@ Add the following to `/etc/environment`
 ```bash
 KWIN_FORCE_SW_CURSOR=1
 ```
+
+### Set up `sunshine` auto start
+
+Basically sunshine can only autorun right after login. So need to set up auto login that immediately locks the screen.
+
+In KDE Plasma, need to enable autologin:
+
+`Settings` -> `Color & Themes` -> `Login Screen (SDDM)` -> `Behaviour` -> Set automatically login, uncheck login after logout.
+
+Then create a `.sh` file anywhere with following content:
+
+`autostart-sunshine.sh`
+
+```bash
+#!/bin/bash
+sleep 1
+xdg-screensaver lock
+```
+
+Then set as login script:
+`Settings` -> `Autostart` -> `Add new` -> `Login script` -> Select the file created earlier.
+
+If GDM is still running, need to disable it:
+
+```bash
+sudo systemctl disable gdm
+```
+
