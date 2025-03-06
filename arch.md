@@ -2,7 +2,7 @@
 
 ## `archinstall` configs
 
-Under `Network Configuration`, select "copy network configuration".
+Under `Network Configuration`, select "Use Network Manager".
 Under `Audio`, select `pipewire`
 
 ## `qemu-guest-agent`
