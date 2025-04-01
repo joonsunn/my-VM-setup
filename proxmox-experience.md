@@ -865,3 +865,18 @@ Then set `Login screen` -> Automatically Log in as user: [user] with session [Pl
 Then under `System Settings` -> `Autostart` -> `+ Add...` -> `Add login script`, click `add` then select `autostart-sunshine.sh` as created above.
 
 If doesn't work, then modify the autostart script to only `xdg-screensaver lock`, then add `sunshine` to `add autostart application`.
+
+## Chinese input
+On newer Kubuntu builds, normally `fcitx5` is already pre-installed.
+
+Settings -> Keyboard -> Virtual Keyboard -> Fcitx 5
+
+Might have to activate fcitx5 manually:
+```bash
+im-config
+```
+
+Then set chinese input (search for 'pinyin'):
+```bash
+fcitx5-configtool
+```
