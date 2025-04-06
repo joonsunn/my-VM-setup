@@ -667,6 +667,15 @@ Create `/etc/environment.d/50-kwin-sw-cursor.conf` with following content (to di
 KWIN_FORCE_SW_CURSOR=1
 ```
 
+For Linux Mint, create `/etc/X11/xorg.confg.d/90-sw-mouse.conf`:
+```
+Section "Device"
+        Identifier      "sw-mouse"
+        Driver  "amdgpu"
+        Option "SWcursor"       "true"
+EndSection
+```
+
 ## Notes on Gnome
 
 Install gnome-shell-extension-manager: <https://github.com/mjakeman/extension-manager>
